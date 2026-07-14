@@ -186,7 +186,7 @@ public class AutoLadder extends Module {
         if (attachSide == null) return false;
 
         if (onlyWall.getValue()) {
-            BlockPosX behindPos = pos.offset(attachSide);
+            BlockPos behindPos = pos.offset(attachSide);
             if (mc.world.isAir(behindPos) || !mc.world.getBlockState(behindPos).isSolid()) {
                 return false;
             }
@@ -211,13 +211,13 @@ public class AutoLadder extends Module {
 
     private Direction getLadderAttachSide(BlockPos pos, Direction preferred) {
         for (Direction dir : Direction.HORIZONTAL) {
-            BlockPosX neighbor = pos.offset(dir);
+            BlockPos neighbor = pos.offset(dir);
             if (mc.world.getBlockState(neighbor).isSolid()) {
                 if (dir == preferred) return dir;
             }
         }
         for (Direction dir : Direction.HORIZONTAL) {
-            BlockPosX neighbor = pos.offset(dir);
+            BlockPos neighbor = pos.offset(dir);
             if (mc.world.getBlockState(neighbor).isSolid()) {
                 return dir;
             }
