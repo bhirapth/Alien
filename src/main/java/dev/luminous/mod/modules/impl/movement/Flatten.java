@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.movement;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.UpdateWalkingPlayerEvent;
 import dev.luminous.api.utils.entity.EntityUtil;
@@ -62,7 +62,7 @@ public class Flatten extends Module {
 		if ((block = getBlock()) == -1) {
 			return;
 		}
-		if (!Alien.PLAYER.insideBlock) return;
+		if (!Supernova.PLAYER.insideBlock) return;
 
 		BlockPos pos1 = new BlockPosX(mc.player.getX() + 0.5, mc.player.getY() + 0.5, mc.player.getZ() + 0.5).down();
 		BlockPos pos2 = new BlockPosX(mc.player.getX() - 0.5, mc.player.getY() + 0.5, mc.player.getZ() + 0.5).down();
@@ -88,7 +88,7 @@ public class Flatten extends Module {
 
 	private void tryPlaceObsidian(BlockPos pos, boolean rotate) {
 		if (canPlace(pos)) {
-			if (checkMine.getValue() && Alien.BREAK.isMining(pos)) {
+			if (checkMine.getValue() && Supernova.BREAK.isMining(pos)) {
 				return;
 			}
 			if (!(progress < blocksPer.getValue())) return;

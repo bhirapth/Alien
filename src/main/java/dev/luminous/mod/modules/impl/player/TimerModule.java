@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.player;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.PacketEvent;
 import dev.luminous.api.utils.entity.MovementUtil;
@@ -39,17 +39,17 @@ public class TimerModule extends Module {
 
 	@Override
 	public void onDisable() {
-		Alien.TIMER.reset();
+		Supernova.TIMER.reset();
 	}
 
 	@Override
 	public void onUpdate() {
-		Alien.TIMER.tryReset();
+		Supernova.TIMER.tryReset();
 	}
 
 	@Override
 	public void onEnable() {
-		Alien.TIMER.reset();
+		Supernova.TIMER.reset();
 	}
 
 	private final Timer timer = new Timer();
@@ -63,7 +63,7 @@ public class TimerModule extends Module {
 	public void onRender2D(DrawContext drawContext, float tickDelta) {
 		if (!tickShift.getValue()) return;
 		timer.setMs(Math.min(Math.max(0, timer.getPassedTimeMs()), accumulate.getValueInt()));
-		if (MovementUtil.isMoving() && !Alien.PLAYER.insideBlock) {
+		if (MovementUtil.isMoving() && !Supernova.PLAYER.insideBlock) {
 
 			if (!moving) {
 				if (timer.passedMs(minAccumulate.getValue())) {
@@ -78,18 +78,18 @@ public class TimerModule extends Module {
 			timer.reset();
 
 			if (timer2.passed(lastMs)) {
-				Alien.TIMER.reset();
+				Supernova.TIMER.reset();
 			} else {
 				if (smooth.getValue()) {
-					double timer = Alien.TIMER.getDefault() + (1 - end.ease(ease.getValue())) * (shiftTimer.getValueFloat() - 1) * (lastMs / accumulate.getValue());
-					Alien.TIMER.set((float) Math.max(Alien.TIMER.getDefault(), timer));
+					double timer = Supernova.TIMER.getDefault() + (1 - end.ease(ease.getValue())) * (shiftTimer.getValueFloat() - 1) * (lastMs / accumulate.getValue());
+					Supernova.TIMER.set((float) Math.max(Supernova.TIMER.getDefault(), timer));
 				} else {
-					Alien.TIMER.set(shiftTimer.getValueFloat());
+					Supernova.TIMER.set(shiftTimer.getValueFloat());
 				}
 			}
 		} else {
 			if (moving) {
-				Alien.TIMER.reset();
+				Supernova.TIMER.reset();
 				if (reset.getValue()) {
 					timer.reset();
 				} else {

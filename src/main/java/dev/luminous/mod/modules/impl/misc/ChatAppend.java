@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.misc;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.settings.impl.StringSetting;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.SendMessageEvent;
@@ -8,7 +8,7 @@ import dev.luminous.mod.modules.Module;
 
 public class ChatAppend extends Module {
 	public static ChatAppend INSTANCE;
-	private final StringSetting message = add(new StringSetting("append", Alien.NAME));
+	private final StringSetting message = add(new StringSetting("append", Supernova.NAME));
 	public ChatAppend() {
 		super("ChatAppend", Category.Misc);
 		setChinese("消息后缀");

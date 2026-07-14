@@ -14,7 +14,7 @@ import dev.luminous.api.utils.math.Timer;
 import dev.luminous.api.utils.render.Render3DUtil;
 import dev.luminous.api.utils.world.BlockUtil;
 import dev.luminous.asm.accessors.IPlayerMoveC2SPacket;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.gui.clickgui.ClickGuiScreen;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.client.AntiCheat;
@@ -665,12 +665,12 @@ public class PacketMine extends Module {
 
 	private boolean faceVector(Vec3d directionVec) {
 		if (!yawStep.getValue()) {
-			Alien.ROTATION.lookAt(directionVec);
+			Supernova.ROTATION.lookAt(directionVec);
 			return true;
 		} else {
 			this.sync.reset();
 			this.directionVec = directionVec;
-			if (Alien.ROTATION.inFov(directionVec, fov.getValueFloat())) {
+			if (Supernova.ROTATION.inFov(directionVec, fov.getValueFloat())) {
 				return true;
 			}
 		}
@@ -805,7 +805,7 @@ public class PacketMine extends Module {
 		if (mc.player.isSubmergedInWater() && !EnchantmentHelper.hasAquaAffinity(mc.player)) {
 			digSpeed /= 5;
 		}
-		boolean inWeb = Alien.PLAYER.isInWeb(mc.player) && mc.world.getBlockState(breakPos).getBlock() == Blocks.COBWEB;
+		boolean inWeb = Supernova.PLAYER.isInWeb(mc.player) && mc.world.getBlockState(breakPos).getBlock() == Blocks.COBWEB;
 		if ((!mc.player.isOnGround() || inWeb) && INSTANCE.checkGround.getValue() && (!smart.getValue() || mc.player.isFallFlying() || inWeb)) {
 			digSpeed /= 5;
 		}

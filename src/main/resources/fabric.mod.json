@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "id": "alien",
+  "id": "supernova",
   "version": "${version}",
-  "name": "Alien",
-  "description": "Alien client",
+  "name": "Supernova",
+  "description": "Supernova client",
   "authors": [
     "ItzLuminous",
     "NotXiguaJerry"
   ],
-  "accessWidener": "alien.accesswidener",
+  "accessWidener": "supernova.accesswidener",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "dev.luminous.Alien"
+      "dev.luminous.Supernova"
     ]
   },
   "mixins": [
-    "alien.mixins.json"
+    "supernova.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.15.0",

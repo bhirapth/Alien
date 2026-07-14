@@ -4,7 +4,7 @@ import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.eventbus.EventPriority;
 import dev.luminous.api.events.impl.TimerEvent;
 import dev.luminous.api.utils.entity.MovementUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.settings.impl.BooleanSetting;
 import dev.luminous.mod.modules.settings.impl.EnumSetting;
@@ -48,7 +48,7 @@ public class FastWeb extends Module {
     private boolean work = false;
     @Override
     public void onUpdate() {
-        work = (!mc.player.isOnGround()) && (mc.options.sneakKey.isPressed() || !onlySneak.getValue()) && Alien.PLAYER.isInWeb(mc.player);
+        work = (!mc.player.isOnGround()) && (mc.options.sneakKey.isPressed() || !onlySneak.getValue()) && Supernova.PLAYER.isInWeb(mc.player);
         if (work && mode.is(Mode.Vanilla)) {
             MovementUtil.setMotionY(MovementUtil.getMotionY() - fastSpeed.getValue());
         }

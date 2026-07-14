@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.gui.clickgui.ClickGuiScreen;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.settings.impl.SliderSetting;
@@ -23,14 +23,14 @@ public class MixinKeyboard implements Wrapper {
 
     @Inject(method = "onKey", at = @At("HEAD"))
     private void onKey(long windowPointer, int key, int scanCode, int action, int modifiers, CallbackInfo ci) {
-        if (mc.currentScreen instanceof ClickGuiScreen && action == 1 && Alien.MODULE.setBind(key)) {
+        if (mc.currentScreen instanceof ClickGuiScreen && action == 1 && Supernova.MODULE.setBind(key)) {
             return;
         }
         if (action == 1) {
-            Alien.MODULE.onKeyPressed(key);
+            Supernova.MODULE.onKeyPressed(key);
         }
         if (action == 0) {
-            Alien.MODULE.onKeyReleased(key);
+            Supernova.MODULE.onKeyReleased(key);
         }
     }
 
@@ -41,14 +41,14 @@ public class MixinKeyboard implements Wrapper {
             Element element = this.client.currentScreen;
             if (element != null && this.client.getOverlay() == null) {
                 if (Character.charCount(codePoint) == 1) {
-                    if (!Module.nullCheck() && Alien.GUI != null) {
-                        if (Alien.GUI.isClickGuiOpen()) {
-                            Alien.MODULE.modules.forEach(module -> module.getSettings().stream()
+                    if (!Module.nullCheck() && Supernova.GUI != null) {
+                        if (Supernova.GUI.isClickGuiOpen()) {
+                            Supernova.MODULE.modules.forEach(module -> module.getSettings().stream()
                                     .filter(setting -> setting instanceof StringSetting)
                                     .map(setting -> (StringSetting) setting)
                                     .filter(StringSetting::isListening)
                                     .forEach(setting -> setting.charType((char)codePoint)));
-                            Alien.MODULE.modules.forEach(module -> module.getSettings().stream()
+                            Supernova.MODULE.modules.forEach(module -> module.getSettings().stream()
                                     .filter(setting -> setting instanceof SliderSetting)
                                     .map(setting -> (SliderSetting) setting)
                                     .filter(SliderSetting::isListening)
@@ -60,14 +60,14 @@ public class MixinKeyboard implements Wrapper {
                     char[] var6 = Character.toChars(codePoint);
 
                     for (char c : var6) {
-                        if (!Module.nullCheck() && Alien.GUI != null) {
-                            if (Alien.GUI.isClickGuiOpen()) {
-                                Alien.MODULE.modules.forEach(module -> module.getSettings().stream()
+                        if (!Module.nullCheck() && Supernova.GUI != null) {
+                            if (Supernova.GUI.isClickGuiOpen()) {
+                                Supernova.MODULE.modules.forEach(module -> module.getSettings().stream()
                                         .filter(setting -> setting instanceof StringSetting)
                                         .map(setting -> (StringSetting) setting)
                                         .filter(StringSetting::isListening)
                                         .forEach(setting -> setting.charType(c)));
-                                Alien.MODULE.modules.forEach(module -> module.getSettings().stream()
+                                Supernova.MODULE.modules.forEach(module -> module.getSettings().stream()
                                         .filter(setting -> setting instanceof SliderSetting)
                                         .map(setting -> (SliderSetting) setting)
                                         .filter(SliderSetting::isListening)

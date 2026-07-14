@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.impl.TotemParticleEvent;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.particle.TotemParticle;
@@ -19,7 +19,7 @@ public abstract class MixinTotemParticle extends MixinParticle {
     private void hookInit(ClientWorld world, double x, double y, double z, double velocityX,
                           double velocityY, double velocityZ, SpriteProvider spriteProvider, CallbackInfo ci) {
         TotemParticleEvent event = new TotemParticleEvent(velocityX,velocityY,velocityZ);
-        Alien.EVENT_BUS.post(event);
+        Supernova.EVENT_BUS.post(event);
         if (event.isCancelled()) {
             this.velocityX = event.velocityX;
             this.velocityY = event.velocityY;

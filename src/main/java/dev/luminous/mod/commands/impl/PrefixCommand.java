@@ -1,6 +1,6 @@
 package dev.luminous.mod.commands.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.commands.Command;
 import dev.luminous.core.impl.CommandManager;
 
@@ -22,7 +22,7 @@ public class PrefixCommand extends Command {
 			CommandManager.sendChatMessage("§fPlease specify a valid §bprefix.");
 			return;
 		}
-		Alien.PREFIX = parameters[0];
+		Supernova.PREFIX = parameters[0];
 		CommandManager.sendChatMessage("§bPrefix §fset to §e" + parameters[0]);
 	}
 

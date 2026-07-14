@@ -10,7 +10,7 @@ import dev.luminous.api.utils.entity.InventoryUtil;
 import dev.luminous.api.utils.math.ExplosionUtil;
 import dev.luminous.api.utils.math.Timer;
 import dev.luminous.api.utils.world.BlockUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.client.AntiCheat;
 import dev.luminous.mod.modules.impl.client.ClientSetting;
@@ -157,11 +157,11 @@ public class AutoCrystalBase extends Module {
     public Vec3d directionVec = null;
     private boolean faceVector(Vec3d directionVec) {
         if (!yawStep.getValue()) {
-            Alien.ROTATION.lookAt(directionVec);
+            Supernova.ROTATION.lookAt(directionVec);
             return true;
         } else {
             this.directionVec = directionVec;
-            if (Alien.ROTATION.inFov(directionVec, fov.getValueFloat())) {
+            if (Supernova.ROTATION.inFov(directionVec, fov.getValueFloat())) {
                 return true;
             }
         }
@@ -353,7 +353,7 @@ public class AutoCrystalBase extends Module {
 
     private void doPlace(BlockPos pos) {
         if (!placeTimer.passedMs((long) placeDelay.getValue())) return;
-        if (detectMining.getValue() && Alien.BREAK.isMining(pos)) return;
+        if (detectMining.getValue() && Supernova.BREAK.isMining(pos)) return;
         int block = getBlock();
         if (block == -1) return;
         Direction side = BlockUtil.getPlaceSide(pos);
@@ -379,7 +379,7 @@ public class AutoCrystalBase extends Module {
             doSwap(old);
         }
         if (rotate.getValue() && !yawStep.getValue() && AntiCheat.INSTANCE.snapBack.getValue()) {
-            Alien.ROTATION.snapBack();
+            Supernova.ROTATION.snapBack();
         }
         placeTimer.reset();
     }

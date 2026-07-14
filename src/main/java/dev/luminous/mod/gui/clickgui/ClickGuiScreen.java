@@ -1,6 +1,6 @@
 package dev.luminous.mod.gui.clickgui;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.gui.clickgui.tabs.Tab;
 import dev.luminous.mod.modules.settings.impl.SliderSetting;
 import dev.luminous.mod.modules.settings.impl.StringSetting;
@@ -26,17 +26,17 @@ public class ClickGuiScreen extends Screen implements Wrapper {
     @Override
     public void render(DrawContext drawContext, int mouseX, int mouseY, float partialTicks) {
         super.render(drawContext, mouseX, mouseY, partialTicks);
-        Alien.GUI.draw(mouseX, mouseY, drawContext, partialTicks);
+        Supernova.GUI.draw(mouseX, mouseY, drawContext, partialTicks);
     }
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        Alien.MODULE.modules.forEach(module -> module.getSettings().stream()
+        Supernova.MODULE.modules.forEach(module -> module.getSettings().stream()
                 .filter(setting -> setting instanceof StringSetting)
                 .map(setting -> (StringSetting) setting)
                 .filter(StringSetting::isListening)
                 .forEach(setting -> setting.keyType(keyCode)));
-        Alien.MODULE.modules.forEach(module -> module.getSettings().stream()
+        Supernova.MODULE.modules.forEach(module -> module.getSettings().stream()
                 .filter(setting -> setting instanceof SliderSetting)
                 .map(setting -> (SliderSetting) setting)
                 .filter(SliderSetting::isListening)
@@ -76,7 +76,7 @@ public class ClickGuiScreen extends Screen implements Wrapper {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
-        for (Tab tab : Alien.GUI.tabs) {
+        for (Tab tab : Supernova.GUI.tabs) {
             tab.setY((int) (tab.getY() + (verticalAmount * 30)));
         }
         return super.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount);

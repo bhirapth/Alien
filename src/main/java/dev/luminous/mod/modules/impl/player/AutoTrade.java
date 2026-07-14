@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.player;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.utils.entity.InventoryUtil;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.settings.impl.BooleanSetting;
@@ -29,7 +29,7 @@ public class AutoTrade extends Module {
                     if (i >= repeat.getValue()) return;
                     TradeOffer tradeOffer = list.get(size);
                     if (!tradeOffer.isDisabled()) {
-                        if (Alien.TRADE.inWhitelist(tradeOffer.getSellItem().getItem().getTranslationKey())) {
+                        if (Supernova.TRADE.inWhitelist(tradeOffer.getSellItem().getItem().getTranslationKey())) {
                             while (i < repeat.getValue() && flag) {
                                 flag = false;
                                 if (!tradeOffer.getAdjustedFirstBuyItem().isEmpty()) {

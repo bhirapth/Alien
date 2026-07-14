@@ -1,7 +1,7 @@
 package dev.luminous.asm.mixins;
 
 import com.mojang.authlib.GameProfile;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.Event;
 import dev.luminous.api.events.impl.MoveEvent;
 import dev.luminous.api.events.impl.MovementPacketsEvent;
@@ -106,7 +106,7 @@ public abstract class MixinClientPlayerEntity extends AbstractClientPlayerEntity
 	@Inject(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;move(Lnet/minecraft/entity/MovementType;Lnet/minecraft/util/math/Vec3d;)V"), cancellable = true)
 	public void onMoveHook(MovementType movementType, Vec3d movement, CallbackInfo ci) {
 		MoveEvent event = new MoveEvent(movement.x, movement.y, movement.z);
-		Alien.EVENT_BUS.post(event);
+		Supernova.EVENT_BUS.post(event);
 		ci.cancel();
 		if (!event.isCancelled()) {
 			super.move(movementType, new Vec3d(event.getX(), event.getY(), event.getZ()));
@@ -164,7 +164,7 @@ public abstract class MixinClientPlayerEntity extends AbstractClientPlayerEntity
 		ci.cancel();
 		try {
 			UpdateWalkingPlayerEvent updateEvent = new UpdateWalkingPlayerEvent(Event.Stage.Pre);
-			Alien.EVENT_BUS.post(updateEvent);
+			Supernova.EVENT_BUS.post(updateEvent);
 			this.sendSprintingPacket();
 			boolean bl = this.isSneaking();
 			if (bl != this.lastSneaking) {
@@ -181,14 +181,14 @@ public abstract class MixinClientPlayerEntity extends AbstractClientPlayerEntity
 				float yaw = this.getYaw();
 				float pitch = this.getPitch();
 				MovementPacketsEvent movementPacketsEvent = new MovementPacketsEvent(yaw, pitch);
-				Alien.EVENT_BUS.post(movementPacketsEvent);
+				Supernova.EVENT_BUS.post(movementPacketsEvent);
 				yaw = movementPacketsEvent.getYaw();
 				pitch = movementPacketsEvent.getPitch();
-				Alien.ROTATION.rotationYaw = yaw;
-				Alien.ROTATION.rotationPitch = pitch;
+				Supernova.ROTATION.rotationYaw = yaw;
+				Supernova.ROTATION.rotationPitch = pitch;
 
-				double g = yaw - Alien.ROTATION.lastYaw;//this.lastYaw;
-				double h = pitch - Alien.ROTATION.lastPitch;//this.lastPitch;
+				double g = yaw - Supernova.ROTATION.lastYaw;//this.lastYaw;
+				double h = pitch - Supernova.ROTATION.lastPitch;//this.lastPitch;
 				++this.ticksSinceLastPositionPacketSent;
 				boolean bl2 = MathHelper.squaredMagnitude(d, e, f) > MathHelper.square(2.0E-4) || this.ticksSinceLastPositionPacketSent >= 20 || (PacketControl.INSTANCE.isOn() && PacketControl.INSTANCE.position.getValue() && PacketControl.INSTANCE.positionT.passed(PacketControl.INSTANCE.positionDelay.getValueInt()));
 				boolean bl3 = (g != 0.0 || h != 0.0 || (PacketControl.INSTANCE.isOn() && PacketControl.INSTANCE.rotate.getValue() && PacketControl.INSTANCE.rotationT.passed(PacketControl.INSTANCE.rotationDelay.getValueInt())));
@@ -224,7 +224,7 @@ public abstract class MixinClientPlayerEntity extends AbstractClientPlayerEntity
 				this.lastOnGround = this.isOnGround();
 				this.autoJumpEnabled = this.client.options.getAutoJump().getValue();
 			}
-			Alien.EVENT_BUS.post(new UpdateWalkingPlayerEvent(Event.Stage.Post));
+			Supernova.EVENT_BUS.post(new UpdateWalkingPlayerEvent(Event.Stage.Post));
 		} catch (Exception e) {
 			e.printStackTrace();
 			if (ClientSetting.INSTANCE.debug.getValue())
@@ -243,18 +243,18 @@ public abstract class MixinClientPlayerEntity extends AbstractClientPlayerEntity
 		try {
 			if (this.hasVehicle()) {
 				UpdateWalkingPlayerEvent updateEvent = new UpdateWalkingPlayerEvent(Event.Stage.Pre);
-				Alien.EVENT_BUS.post(updateEvent);
+				Supernova.EVENT_BUS.post(updateEvent);
 				float yaw = this.getYaw();
 				float pitch = this.getPitch();
 				MovementPacketsEvent movementPacketsEvent = new MovementPacketsEvent(yaw, pitch);
-				Alien.EVENT_BUS.post(movementPacketsEvent);
+				Supernova.EVENT_BUS.post(movementPacketsEvent);
 				yaw = movementPacketsEvent.getYaw();
 				pitch = movementPacketsEvent.getPitch();
-				Alien.ROTATION.rotationYaw = yaw;
-				Alien.ROTATION.rotationPitch = pitch;
+				Supernova.ROTATION.rotationYaw = yaw;
+				Supernova.ROTATION.rotationPitch = pitch;
 
 				this.networkHandler.sendPacket(new PlayerMoveC2SPacket.LookAndOnGround(yaw, pitch, this.isOnGround()));
-				Alien.EVENT_BUS.post(new UpdateWalkingPlayerEvent(Event.Stage.Post));
+				Supernova.EVENT_BUS.post(new UpdateWalkingPlayerEvent(Event.Stage.Post));
 				this.networkHandler.sendPacket(new PlayerInputC2SPacket(this.sidewaysSpeed, this.forwardSpeed, this.input.jumping, this.input.sneaking));
 				Entity entity = this.getRootVehicle();
 				if (entity != this && entity.isLogicalSideForUpdatingMovement()) {

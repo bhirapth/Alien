@@ -1,6 +1,6 @@
 package dev.luminous.mod.commands.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.CommandManager;
 import dev.luminous.core.impl.ConfigManager;
 import dev.luminous.mod.commands.Command;
@@ -16,12 +16,12 @@ public class ReloadCommand extends Command {
 	@Override
 	public void runCommand(String[] parameters) {
 		CommandManager.sendChatMessage("§fReloading..");
-		Alien.CONFIG = new ConfigManager();
-		Alien.PREFIX = Alien.CONFIG.getString("prefix", Alien.PREFIX);
-		Alien.CONFIG.loadSettings();
-		Alien.XRAY.read();
-		Alien.TRADE.read();
-		Alien.FRIEND.read();
+		Supernova.CONFIG = new ConfigManager();
+		Supernova.PREFIX = Supernova.CONFIG.getString("prefix", Supernova.PREFIX);
+		Supernova.CONFIG.loadSettings();
+		Supernova.XRAY.read();
+		Supernova.TRADE.read();
+		Supernova.FRIEND.read();
 	}
 
 	@Override

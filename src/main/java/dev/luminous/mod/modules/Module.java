@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.CommandManager;
 import dev.luminous.core.impl.ModuleManager;
 import dev.luminous.mod.Mod;
@@ -118,7 +118,7 @@ public abstract class Module extends Mod {
 			}
 		}
 		this.state = true;
-		Alien.EVENT_BUS.subscribe(this);
+		Supernova.EVENT_BUS.subscribe(this);
 		this.onToggle();
 		try {
 			this.onEnable();
@@ -144,7 +144,7 @@ public abstract class Module extends Mod {
 			}
 		}
 		this.state = false;
-		Alien.EVENT_BUS.unsubscribe(this);
+		Supernova.EVENT_BUS.unsubscribe(this);
 		this.onToggle();
 		this.onDisable();
 	}

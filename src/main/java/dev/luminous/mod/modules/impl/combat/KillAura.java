@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.combat;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.LookAtEvent;
 import dev.luminous.api.events.impl.PacketEvent;
@@ -170,7 +170,7 @@ public class KillAura extends Module {
         if (cd.getValue() == Cooldown.Vanilla) {
             at = ((ILivingEntity) mc.player).getLastAttackedTicks();
         }
-        at = (int) (at * Alien.SERVER.getTPSFactor());
+        at = (int) (at * Supernova.SERVER.getTPSFactor());
         if (!(Math.max(at / getAttackCooldownProgressPerTick(), 0.0F) >= cooldown.getValue()))
             return false;
         return whileEating.getValue() || !mc.player.isUsingItem();
@@ -197,11 +197,11 @@ public class KillAura extends Module {
 
     public boolean faceVector(Vec3d directionVec) {
         if (!yawStep.getValue()) {
-            Alien.ROTATION.lookAt(directionVec);
+            Supernova.ROTATION.lookAt(directionVec);
             return true;
         } else {
             this.directionVec = directionVec;
-            if (Alien.ROTATION.inFov(directionVec, fov.getValueFloat())) {
+            if (Supernova.ROTATION.inFov(directionVec, fov.getValueFloat())) {
                 return true;
             }
         }

@@ -1,6 +1,6 @@
 package dev.luminous.mod.gui.clickgui.components.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.utils.math.Animation;
 import dev.luminous.mod.modules.impl.client.ClickGui;
 import dev.luminous.mod.modules.settings.impl.EnumSetting;
@@ -106,9 +106,9 @@ public class EnumComponent extends Component {
 		MatrixStack matrixStack = drawContext.getMatrices();
 
 		if (ClickGui.INSTANCE.mainEnd.booleanValue) {
-			Render2DUtil.drawRectHorizontal(matrixStack, (float) x + 1, (float) y + 1, (float) width - 2, (float) defaultHeight - (ClickGui.INSTANCE.maxFill.getValue() ? 0 : 1), hover ? ClickGui.INSTANCE.mainHover.getValue() : Alien.GUI.getColor(), ClickGui.INSTANCE.mainEnd.getValue());
+			Render2DUtil.drawRectHorizontal(matrixStack, (float) x + 1, (float) y + 1, (float) width - 2, (float) defaultHeight - (ClickGui.INSTANCE.maxFill.getValue() ? 0 : 1), hover ? ClickGui.INSTANCE.mainHover.getValue() : Supernova.GUI.getColor(), ClickGui.INSTANCE.mainEnd.getValue());
 		} else {
-			Render2DUtil.drawRect(matrixStack, (float) x + 1, (float) y + 1, (float) width - 2, (float) defaultHeight - (ClickGui.INSTANCE.maxFill.getValue() ? 0 : 1), hover ? ClickGui.INSTANCE.mainHover.getValue() : Alien.GUI.getColor());
+			Render2DUtil.drawRect(matrixStack, (float) x + 1, (float) y + 1, (float) width - 2, (float) defaultHeight - (ClickGui.INSTANCE.maxFill.getValue() ? 0 : 1), hover ? ClickGui.INSTANCE.mainHover.getValue() : Supernova.GUI.getColor());
 		}
 		TextUtil.drawString(drawContext, setting.getName() + ": " + setting.getValue().name(), x + 4, y + getTextOffsetY(), -1);
 		TextUtil.drawString(drawContext, setting.popped ? "-" : "+", x + width - 11, y + getTextOffsetY(), new Color(255, 255, 255).getRGB());

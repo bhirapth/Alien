@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.Event;
 import dev.luminous.api.events.impl.SprintEvent;
 import dev.luminous.mod.modules.impl.exploit.NoBadEffects;
@@ -94,7 +94,7 @@ public abstract class MixinLivingEntity extends Entity {
     public void setSprintingHook(boolean sprinting, CallbackInfo ci) {
         if ((Object) this == MinecraftClient.getInstance().player) {
             SprintEvent event = new SprintEvent(Event.Stage.Pre);
-            Alien.EVENT_BUS.post(event);
+            Supernova.EVENT_BUS.post(event);
             if (event.isCancelled()) {
                 ci.cancel();
                 sprinting = event.isSprint();

@@ -2,7 +2,7 @@ package dev.luminous.asm.mixins;
 
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.commands.Command;
 import dev.luminous.mod.modules.impl.client.ClientSetting;
 import dev.luminous.api.utils.render.Render2DUtil;
@@ -65,7 +65,7 @@ public abstract class MixinChatInputSuggestor {
 	@Inject(at = {
 			@At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/TextFieldWidget;getCursor()I", ordinal = 0)}, method = "refresh()V")
 	private void onRefresh(CallbackInfo ci) {
-		String prefix = Alien.PREFIX;
+		String prefix = Supernova.PREFIX;
 		String string = this.textField.getText();
 
 		showOutline = string.startsWith(prefix);
@@ -92,13 +92,13 @@ public abstract class MixinChatInputSuggestor {
 					int count = StringUtils.countMatches(string2, " ");
 					List<String> seperated = Arrays.asList(string2.split(" "));
 					if (count == 0) {
-						for (Object strObj : Alien.COMMAND.getCommands().keySet().toArray()) {
+						for (Object strObj : Supernova.COMMAND.getCommands().keySet().toArray()) {
 							String str = (String) strObj;
-							builder.suggest(Alien.PREFIX + str + " ");
+							builder.suggest(Supernova.PREFIX + str + " ");
 						}
 					} else {
 						if (seperated.isEmpty()) return;
-						Command c = Alien.COMMAND.getCommandBySyntax(seperated.get(0).substring(prefix.length()));
+						Command c = Supernova.COMMAND.getCommandBySyntax(seperated.get(0).substring(prefix.length()));
 						if (c == null) {
 							messages.add(Text.of("§cno commands found: §e" + seperated.get(0).substring(prefix.length())).asOrderedText());
 							return;

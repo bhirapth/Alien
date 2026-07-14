@@ -4,7 +4,7 @@ import baritone.api.BaritoneAPI;
 import baritone.api.IBaritone;
 import baritone.api.pathing.calc.IPathingControlManager;
 import baritone.api.process.ICustomGoalProcess;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.TickEvent;
 import dev.luminous.mod.modules.Module;
@@ -39,7 +39,7 @@ public class BaritoneModule extends Module {
 
     public BaritoneModule() {
         super("Baritone", Category.Client);
-        Alien.EVENT_BUS.subscribe(this);
+        Supernova.EVENT_BUS.subscribe(this);
         INSTANCE = this;
     }
 

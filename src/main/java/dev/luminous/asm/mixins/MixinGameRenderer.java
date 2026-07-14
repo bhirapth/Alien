@@ -1,7 +1,7 @@
 package dev.luminous.asm.mixins;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.utils.render.TextUtil;
 import dev.luminous.api.utils.world.InteractUtil;
 import dev.luminous.mod.modules.impl.player.Freecam;
@@ -85,8 +85,8 @@ public class MixinGameRenderer {
         TextUtil.lastProjMat.set(RenderSystem.getProjectionMatrix());
         TextUtil.lastModMat.set(RenderSystem.getModelViewMatrix());
         TextUtil.lastWorldSpaceMatrix.set(matrix.peek().getPositionMatrix());
-        Alien.FPS.record();
-        Alien.MODULE.render3D(matrix);
+        Supernova.FPS.record();
+        Supernova.MODULE.render3D(matrix);
     }
 
     @Inject(method = "getFov(Lnet/minecraft/client/render/Camera;FZ)D", at = @At("HEAD"), cancellable = true)
@@ -132,7 +132,7 @@ public class MixinGameRenderer {
 
     @Inject(method = "renderWorld", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/GameRenderer;renderHand(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/Camera;F)V", shift = At.Shift.AFTER))
     public void postRender3dHook(float tickDelta, long limitTime, MatrixStack matrix, CallbackInfo ci) {
-        Alien.SHADER.renderShaders();
+        Supernova.SHADER.renderShaders();
     }
 
     @Inject(method = "getBasicProjectionMatrix",at = @At("TAIL"), cancellable = true)

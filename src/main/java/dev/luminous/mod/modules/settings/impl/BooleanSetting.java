@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.settings.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.ModuleManager;
 import dev.luminous.mod.modules.settings.Setting;
 
@@ -49,7 +49,7 @@ public class BooleanSetting extends Setting {
 	}
 	@Override
 	public void loadSetting() {
-		this.value = Alien.CONFIG.getBoolean(this.getLine(), defaultValue);
+		this.value = Supernova.CONFIG.getBoolean(this.getLine(), defaultValue);
 	}
 
 	public BooleanSetting setParent() {

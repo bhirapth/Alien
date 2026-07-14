@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.impl.HeldItemRendererEvent;
 import dev.luminous.mod.modules.impl.render.ViewModel;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -31,7 +31,7 @@ public abstract class MixinHeldItemRenderer {
     @Inject(method = "renderFirstPersonItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/HeldItemRenderer;renderItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V"), cancellable = true)
     private void onRenderItem(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
         HeldItemRendererEvent event = new HeldItemRendererEvent(hand, item, equipProgress, matrices);
-        Alien.EVENT_BUS.post(event);
+        Supernova.EVENT_BUS.post(event);
     }
 
     @Shadow
@@ -98,7 +98,7 @@ public abstract class MixinHeldItemRenderer {
                 }
 
                 HeldItemRendererEvent event = new HeldItemRendererEvent(hand, item, equipProgress, matrices);
-                Alien.EVENT_BUS.post(event);
+                Supernova.EVENT_BUS.post(event);
                 this.renderItem(player, item, bl3 ? ModelTransformationMode.FIRST_PERSON_RIGHT_HAND : ModelTransformationMode.FIRST_PERSON_LEFT_HAND, !bl3, matrices, vertexConsumers, light);
             } else {
                 bl2 = arm == Arm.RIGHT;
@@ -176,7 +176,7 @@ public abstract class MixinHeldItemRenderer {
                 }
 
                 HeldItemRendererEvent event = new HeldItemRendererEvent(hand, item, equipProgress, matrices);
-                Alien.EVENT_BUS.post(event);
+                Supernova.EVENT_BUS.post(event);
                 this.renderItem(player, item, bl2 ? ModelTransformationMode.FIRST_PERSON_RIGHT_HAND : ModelTransformationMode.FIRST_PERSON_LEFT_HAND, !bl2, matrices, vertexConsumers, light);
             }
             matrices.pop();

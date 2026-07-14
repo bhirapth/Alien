@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.misc;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.ServerConnectBeginEvent;
 import dev.luminous.api.utils.entity.InventoryUtil;
@@ -35,7 +35,7 @@ public class AutoReconnect extends Module {
         super("AutoReconnect", Category.Misc);
         setChinese("自动重连");
         INSTANCE = this;
-        Alien.EVENT_BUS.subscribe(new StaticListener());
+        Supernova.EVENT_BUS.subscribe(new StaticListener());
     }
     private final Timer queueTimer = new Timer();
     private final Timer timer = new Timer();

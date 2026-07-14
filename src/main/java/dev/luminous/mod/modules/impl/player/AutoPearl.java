@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.player;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.LookAtEvent;
 import dev.luminous.mod.modules.impl.client.AntiCheat;
@@ -48,7 +48,7 @@ public class AutoPearl extends Module {
 
 	@Override
 	public void onUpdate() {
-		if (rotation.getValue() && Alien.ROTATION.inFov(mc.player.getYaw(), mc.player.getPitch(), fov.getValueFloat())) {
+		if (rotation.getValue() && Supernova.ROTATION.inFov(mc.player.getYaw(), mc.player.getPitch(), fov.getValueFloat())) {
 			throwing = true;
 			int pearl;
 
@@ -82,28 +82,28 @@ public class AutoPearl extends Module {
 		throwing = true;
 		int pearl;
 		if (mc.player.getMainHandStack().getItem() == Items.ENDER_PEARL) {
-			Alien.ROTATION.snapAt(yaw, pitch);
+			Supernova.ROTATION.snapAt(yaw, pitch);
 			sendSequencedPacket(id -> new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, id));
 			if (AntiCheat.INSTANCE.snapBack.getValue()) {
-				Alien.ROTATION.snapBack();
+				Supernova.ROTATION.snapBack();
 			}
 		} else if (inventory.getValue() && (pearl = InventoryUtil.findItemInventorySlot(Items.ENDER_PEARL)) != -1) {
 			InventoryUtil.inventorySwap(pearl, mc.player.getInventory().selectedSlot);
-			Alien.ROTATION.snapAt(yaw, pitch);
+			Supernova.ROTATION.snapAt(yaw, pitch);
 			sendSequencedPacket(id -> new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, id));
 			InventoryUtil.inventorySwap(pearl, mc.player.getInventory().selectedSlot);
 			EntityUtil.syncInventory();
 			if (AntiCheat.INSTANCE.snapBack.getValue()) {
-				Alien.ROTATION.snapBack();
+				Supernova.ROTATION.snapBack();
 			}
 		} else if ((pearl = InventoryUtil.findItem(Items.ENDER_PEARL)) != -1) {
 			int old = mc.player.getInventory().selectedSlot;
 			InventoryUtil.switchToSlot(pearl);
-			Alien.ROTATION.snapAt(yaw, pitch);
+			Supernova.ROTATION.snapAt(yaw, pitch);
 			sendSequencedPacket(id -> new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, id));
 			InventoryUtil.switchToSlot(old);
 			if (AntiCheat.INSTANCE.snapBack.getValue()) {
-				Alien.ROTATION.snapBack();
+				Supernova.ROTATION.snapBack();
 			}
 		}
 		throwing = false;

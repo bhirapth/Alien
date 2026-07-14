@@ -1,6 +1,6 @@
 package dev.luminous.mod.commands.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.PacketEvent;
 import dev.luminous.core.impl.CommandManager;
@@ -21,7 +21,7 @@ public class PingCommand extends Command {
 	public void runCommand(String[] parameters) {
 		sendTime = System.currentTimeMillis();
 		mc.getNetworkHandler().sendChatCommand("chat ");
-		Alien.EVENT_BUS.subscribe(this);
+		Supernova.EVENT_BUS.subscribe(this);
 	}
 
 
@@ -35,7 +35,7 @@ public class PingCommand extends Command {
 		if (e.getPacket() instanceof GameMessageS2CPacket packet) {
 			if (packet.content().getString().contains("chat.use") || packet.content().getString().contains("命令") || packet.content().getString().contains("Bad command")|| packet.content().getString().contains("No such command") || packet.content().getString().contains("<--[HERE]") || packet.content().getString().contains("Unknown") || packet.content().getString().contains("帮助") || packet.content().getString().contains("执行错误")) {
 				CommandManager.sendChatMessage("ping: " + (System.currentTimeMillis() - sendTime) + "ms");
-				Alien.EVENT_BUS.unsubscribe(this);
+				Supernova.EVENT_BUS.unsubscribe(this);
 			}
 		}
 	}

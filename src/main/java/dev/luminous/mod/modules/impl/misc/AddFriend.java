@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.misc;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.hit.EntityHitResult;
@@ -23,7 +23,7 @@ public class AddFriend extends Module {
 		}
 		HitResult target = mc.crosshairTarget;
 		if (target instanceof EntityHitResult entityHitResult && entityHitResult.getEntity() instanceof PlayerEntity player) {
-			Alien.FRIEND.friend(player);
+			Supernova.FRIEND.friend(player);
 		}
 		disable();
 	}

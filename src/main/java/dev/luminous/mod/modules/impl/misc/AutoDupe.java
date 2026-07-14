@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.misc;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.RotateEvent;
 import dev.luminous.api.utils.entity.EntityUtil;
@@ -357,7 +357,7 @@ public class AutoDupe extends Module {
 
                         int slot = InventoryUtil.findItemInventorySlot(Items.EGG);
                         InventoryUtil.inventorySwap(slot, mc.player.getInventory().selectedSlot);
-                        Alien.ROTATION.snapAt(Alien.ROTATION.lastYaw, 89);
+                        Supernova.ROTATION.snapAt(Supernova.ROTATION.lastYaw, 89);
                         sendSequencedPacket(id -> new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, id));
                         InventoryUtil.inventorySwap(slot, mc.player.getInventory().selectedSlot);
                     }
@@ -423,7 +423,7 @@ public class AutoDupe extends Module {
 
                                 int slot = InventoryUtil.findBlockInventorySlot(Blocks.HAY_BLOCK);
                                 InventoryUtil.inventorySwap(slot, mc.player.getInventory().selectedSlot);
-                                Alien.ROTATION.lookAt(llama.getPos());
+                                Supernova.ROTATION.lookAt(llama.getPos());
                                 mc.interactionManager.interactEntity(mc.player, llama, Hand.MAIN_HAND);
                                 InventoryUtil.inventorySwap(slot, mc.player.getInventory().selectedSlot);
                             } else {
@@ -451,7 +451,7 @@ public class AutoDupe extends Module {
                                         //mc.setScreen(null);
 
                                         InventoryUtil.inventorySwap(chestSlot, mc.player.getInventory().selectedSlot);
-                                        Alien.ROTATION.lookAt(llama.getPos());
+                                        Supernova.ROTATION.lookAt(llama.getPos());
                                         mc.interactionManager.interactEntity(mc.player, llama, Hand.MAIN_HAND);
                                         InventoryUtil.inventorySwap(chestSlot, mc.player.getInventory().selectedSlot);
                                     }
@@ -499,7 +499,7 @@ public class AutoDupe extends Module {
                         }
                         InventoryUtil.switchToSlot(swordSlot);
                         if (check()) {
-                            Alien.ROTATION.lookAt(llama.getEyePos());
+                            Supernova.ROTATION.lookAt(llama.getEyePos());
                             mc.interactionManager.attackEntity(mc.player, llama);
                             EntityUtil.swingHand(Hand.MAIN_HAND, SwingSide.All);
                         }
@@ -525,7 +525,7 @@ public class AutoDupe extends Module {
         double speed = 0.2873 / 1.5;
         float forward = 1f;
         float side = 0;
-        float yaw = Alien.ROTATION.getRotation(pos.toCenterPos())[0];
+        float yaw = Supernova.ROTATION.getRotation(pos.toCenterPos())[0];
         final double sin = Math.sin(Math.toRadians(yaw + 90.0f));
         final double cos = Math.cos(Math.toRadians(yaw + 90.0f));
         final double posX = forward * speed * cos + side * speed * sin;

@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.impl.DurabilityEvent;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
@@ -25,7 +25,7 @@ public abstract class MixinItemStack {
             value = "RETURN"))
     private void hookInitItem(ItemConvertible item, int count, CallbackInfo ci) {
         DurabilityEvent durabilityEvent = new DurabilityEvent(getDamage());
-        Alien.EVENT_BUS.post(durabilityEvent);
+        Supernova.EVENT_BUS.post(durabilityEvent);
         if (durabilityEvent.isCancelled()) {
             getOrCreateNbt().putInt("Damage", durabilityEvent.getDamage());
         }
@@ -35,7 +35,7 @@ public abstract class MixinItemStack {
             value = "RETURN"))
     private void hookInitNbt(NbtCompound nbt, CallbackInfo ci) {
         DurabilityEvent durabilityEvent = new DurabilityEvent(nbt.getInt("Damage"));
-        Alien.EVENT_BUS.post(durabilityEvent);
+        Supernova.EVENT_BUS.post(durabilityEvent);
         if (durabilityEvent.isCancelled()) {
             getOrCreateNbt().putInt("Damage", durabilityEvent.getDamage());
         }

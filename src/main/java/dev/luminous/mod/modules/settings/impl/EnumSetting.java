@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.settings.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.ModuleManager;
 import dev.luminous.mod.modules.settings.EnumConverter;
 import dev.luminous.mod.modules.settings.Setting;
@@ -39,7 +39,7 @@ public class EnumSetting<T extends Enum<T>> extends Setting {
     @Override
     public void loadSetting() {
         EnumConverter converter = new EnumConverter();
-        String enumString = Alien.CONFIG.getString(this.getLine());
+        String enumString = Supernova.CONFIG.getString(this.getLine());
         if (enumString == null) {
             value = defaultValue;
             return;

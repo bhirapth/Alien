@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.client;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.utils.math.AnimateUtil;
 import dev.luminous.api.utils.render.ColorUtil;
 import dev.luminous.api.utils.render.Render2DUtil;
@@ -71,7 +71,7 @@ public class ModuleList extends Module {
     @Override
     public void onEnable() {
         modulesList.clear();
-        for (Module module : Alien.MODULE.modules) {
+        for (Module module : Supernova.MODULE.modules) {
             modulesList.add(new Modules(module));
         }
     }

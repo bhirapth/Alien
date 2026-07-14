@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.combat;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.utils.combat.CombatUtil;
 import dev.luminous.api.utils.entity.EntityUtil;
 import dev.luminous.api.utils.entity.InventoryUtil;
@@ -72,14 +72,14 @@ public class AutoHoleFill extends Module {
         if (inAirPause.getValue() && !mc.player.isOnGround()) return;
         CombatUtil.getEnemies(enemyRange.getValue()).stream()
                 .flatMap(enemy -> BlockUtil.getSphere(holeRange.getValueFloat(), CombatUtil.getEntityPosVec(enemy, predictTicks.getValueInt())).stream())
-                .filter(pos -> pos.toCenterPos().distanceTo(mc.player.getPos()) > selfRange.getValue() && (Alien.HOLE.isHole(pos, true, true, false) || Alien.HOLE.isDoubleHole(pos)))
+                .filter(pos -> pos.toCenterPos().distanceTo(mc.player.getPos()) > selfRange.getValue() && (Supernova.HOLE.isHole(pos, true, true, false) || Supernova.HOLE.isDoubleHole(pos)))
                 .distinct()
                 .forEach(this::tryPlaceBlock);
     }
 
     private void tryPlaceBlock(BlockPos pos) {
         if (pos == null) return;
-        if (detectMining.getValue() && Alien.BREAK.isMining(pos)) return;
+        if (detectMining.getValue() && Supernova.BREAK.isMining(pos)) return;
         if (!(progress < blocksPer.getValue())) return;
         int block = getBlock();
         if (block == -1) return;

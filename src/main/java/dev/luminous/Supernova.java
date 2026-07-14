@@ -8,14 +8,14 @@ import java.lang.invoke.MethodHandles;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public final class Alien implements ModInitializer {
+public final class Supernova implements ModInitializer {
 
     @Override
     public void onInitialize() {
         load();
     }
 
-    public static final String NAME = "Alien";
+    public static final String NAME = "Supernova";
     public static final String VERSION = "1.3.7";
     public static String PREFIX = ";";
     public static final EventBus EVENT_BUS = new EventBus();
@@ -45,7 +45,7 @@ public final class Alien implements ModInitializer {
         EVENT_BUS.registerLambdaFactory((lookupInMethod, klass) -> (MethodHandles.Lookup) lookupInMethod.invoke(null, klass, MethodHandles.lookup()));
         CONFIG = new ConfigManager();
 
-        PREFIX = Alien.CONFIG.getString("prefix", ";");
+        PREFIX = Supernova.CONFIG.getString("prefix", ";");
         THREAD = new ThreadManager();
         HOLE = new HoleManager();
         MODULE = new ModuleManager();
@@ -64,7 +64,7 @@ public final class Alien implements ModInitializer {
         FPS = new FPSManager();
         SERVER = new ServerManager();
         CONFIG.loadSettings();
-        System.out.println("[" + Alien.NAME + "] loaded");
+        System.out.println("[" + Supernova.NAME + "] loaded");
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             if (loaded) {
@@ -76,18 +76,18 @@ public final class Alien implements ModInitializer {
 
     public static void unload() {
         loaded = false;
-        System.out.println("[" + Alien.NAME + "] Unloading..");
+        System.out.println("[" + Supernova.NAME + "] Unloading..");
         EVENT_BUS.listenerMap.clear();
         ConfigManager.resetModule();
-        System.out.println("[" + Alien.NAME + "] Unloaded");
+        System.out.println("[" + Supernova.NAME + "] Unloaded");
     }
 
     public static void save() {
-        System.out.println("[" + Alien.NAME + "] Saving");
+        System.out.println("[" + Supernova.NAME + "] Saving");
         CONFIG.saveSettings();
         FRIEND.save();
         XRAY.save();
         TRADE.save();
-        System.out.println("[" + Alien.NAME + "] Saved");
+        System.out.println("[" + Supernova.NAME + "] Saved");
     }
 }

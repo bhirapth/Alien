@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.movement;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.UpdateWalkingPlayerEvent;
 import dev.luminous.api.utils.entity.MovementUtil;
@@ -41,7 +41,7 @@ public class Step extends Module {
 	public void onDisable() {
 		if (nullCheck()) return;
 		mc.player.setStepHeight(0.6f);
-		Alien.TIMER.reset();
+		Supernova.TIMER.reset();
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class Step extends Module {
 	boolean timer;
     @Override
     public void onUpdate() {
-		if (pathingPause.getValue() && BaritoneModule.isActive() || sneakingPause.getValue() && mc.player.isSneaking() || inBlockPause.getValue() && Alien.PLAYER.insideBlock || mc.player.isInLava() || mc.player.isTouchingWater() || inWebPause.getValue() && Alien.PLAYER.isInWeb(mc.player) || !mc.player.isOnGround() || onlyMoving.getValue() && !MovementUtil.isMoving() || surroundPause.getValue() && (Surround.INSTANCE.isOn() || SelfTrap.INSTANCE.isOn())) {
+		if (pathingPause.getValue() && BaritoneModule.isActive() || sneakingPause.getValue() && mc.player.isSneaking() || inBlockPause.getValue() && Supernova.PLAYER.insideBlock || mc.player.isInLava() || mc.player.isTouchingWater() || inWebPause.getValue() && Supernova.PLAYER.isInWeb(mc.player) || !mc.player.isOnGround() || onlyMoving.getValue() && !MovementUtil.isMoving() || surroundPause.getValue() && (Surround.INSTANCE.isOn() || SelfTrap.INSTANCE.isOn())) {
 			mc.player.setStepHeight(0.6f);
 			return;
 		}
@@ -68,7 +68,7 @@ public class Step extends Module {
 			return;
 		}
 		if (timer && packets <= 0) {
-			Alien.TIMER.reset();
+			Supernova.TIMER.reset();
 			timer = false;
 		}
 		boolean strict = mode.getValue() == Mode.NCP;
@@ -81,7 +81,7 @@ public class Step extends Module {
 			double[] offsets = getOffset(stepHeight);
 			if (offsets != null && offsets.length > 1) {
 				if (useTimer.getValue()) {
-					Alien.TIMER.set((float) getTimer(stepHeight));
+					Supernova.TIMER.set((float) getTimer(stepHeight));
 					timer = true;
 					packets = 2;
 				}

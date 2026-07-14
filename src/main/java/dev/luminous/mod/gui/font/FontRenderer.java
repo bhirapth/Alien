@@ -2,7 +2,7 @@ package dev.luminous.mod.gui.font;
 
 import com.google.common.base.Preconditions;
 import com.mojang.blaze3d.systems.RenderSystem;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import it.unimi.dsi.fastutil.chars.Char2IntArrayMap;
 import it.unimi.dsi.fastutil.chars.Char2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
@@ -238,7 +238,7 @@ public class FontRenderer implements Closeable {
         for (int i = 0; i < chars.length; i++) {
             char c = chars[i];
 
-            Color color = Alien.GUI.getColor();
+            Color color = Supernova.GUI.getColor();
 
             a = color.getAlpha() / 255f;
 
@@ -358,7 +358,7 @@ public class FontRenderer implements Closeable {
 
     @Contract(value = "-> new", pure = true)
     public static @NotNull Identifier randomIdentifier() {
-        return new Identifier("alien", "temp/" + randomString(32));
+        return new Identifier("supernova", "temp/" + randomString(32));
     }
 
     private static String randomString(int length) {

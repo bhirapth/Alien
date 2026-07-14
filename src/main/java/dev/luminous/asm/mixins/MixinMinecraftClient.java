@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.Event;
 import dev.luminous.api.events.impl.GameLeftEvent;
 import dev.luminous.api.events.impl.OpenScreenEvent;
@@ -52,14 +52,14 @@ public abstract class MixinMinecraftClient extends ReentrantThreadExecutor<Runna
 	@Inject(method = "setScreen", at = @At("HEAD"), cancellable = true)
 	private void onSetScreen(Screen screen, CallbackInfo info) {
 		OpenScreenEvent event = new OpenScreenEvent(screen);
-		Alien.EVENT_BUS.post(event);
+		Supernova.EVENT_BUS.post(event);
 
 		if (event.isCancelled()) info.cancel();
 	}
 	@Inject(method = "disconnect(Lnet/minecraft/client/gui/screen/Screen;)V", at = @At("HEAD"))
 	private void onDisconnect(Screen screen, CallbackInfo info) {
 		if (world != null) {
-			Alien.EVENT_BUS.post(new GameLeftEvent());
+			Supernova.EVENT_BUS.post(new GameLeftEvent());
 		}
 	}
 
@@ -118,11 +118,11 @@ public abstract class MixinMinecraftClient extends ReentrantThreadExecutor<Runna
 
 	@Inject(at = @At("HEAD"), method = "tick()V")
 	public void tickHead(CallbackInfo info) {
-		Alien.EVENT_BUS.post(new TickEvent(Event.Stage.Pre));
+		Supernova.EVENT_BUS.post(new TickEvent(Event.Stage.Pre));
 	}
 	@Inject(at = @At("TAIL"), method = "tick()V")
 	public void tickTail(CallbackInfo info) {
-		Alien.EVENT_BUS.post(new TickEvent(Event.Stage.Post));
+		Supernova.EVENT_BUS.post(new TickEvent(Event.Stage.Post));
 	}
 
 
@@ -133,7 +133,7 @@ public abstract class MixinMinecraftClient extends ReentrantThreadExecutor<Runna
 	@Overwrite
 	private String getWindowTitle() {
 		if (ClientSetting.INSTANCE == null) {
-			return Alien.NAME + ": Loading..";
+			return Supernova.NAME + ": Loading..";
 		}
 		if (ClientSetting.INSTANCE.titleOverride.getValue()) {
 			return ClientSetting.INSTANCE.windowTitle.getValue();

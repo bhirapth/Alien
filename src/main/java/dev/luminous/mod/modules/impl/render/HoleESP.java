@@ -4,7 +4,7 @@ import dev.luminous.api.utils.math.Timer;
 import dev.luminous.api.utils.render.ColorUtil;
 import dev.luminous.api.utils.render.Render3DUtil;
 import dev.luminous.api.utils.world.BlockUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.settings.impl.BooleanSetting;
 import dev.luminous.mod.modules.settings.impl.ColorSetting;
@@ -80,12 +80,12 @@ public class HoleESP extends Module {
 		Bedrock
 	}
 	Type isHole(BlockPos pos) {
-		if (mc.world.isAir(pos) && (!airYCheck.getValue() || pos.getY() == mc.player.getBlockY() - 1) && Alien.HOLE.isHard(pos.up())) return Type.Air;
+		if (mc.world.isAir(pos) && (!airYCheck.getValue() || pos.getY() == mc.player.getBlockY() - 1) && Supernova.HOLE.isHard(pos.up())) return Type.Air;
 		int blockProgress = 0;
 		boolean bedRock = true;
 		for (Direction i : Direction.values()) {
 			if (i == Direction.UP || i == Direction.DOWN) continue;
-			if (Alien.HOLE.isHard(pos.offset(i))) {
+			if (Supernova.HOLE.isHard(pos.offset(i))) {
 				if (mc.world.getBlockState(pos.offset(i)).getBlock() != Blocks.BEDROCK) {
 					bedRock = false;
 				}
@@ -96,7 +96,7 @@ public class HoleESP extends Module {
 			if (bedRock) return Type.Bedrock;
 			return Type.Normal;
 		}
-		if (Alien.HOLE.isDoubleHole(pos)) return Type.Normal;
+		if (Supernova.HOLE.isDoubleHole(pos)) return Type.Normal;
 		return Type.None;
 	}
 

@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.render;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import net.minecraft.block.Block;
 
@@ -25,6 +25,6 @@ public class XRay extends Module {
     }
 
     public boolean isCheckableOre(Block block) {
-        return Alien.XRAY.inWhitelist(block.getTranslationKey());
+        return Supernova.XRAY.inWhitelist(block.getTranslationKey());
     }
 }

@@ -1,7 +1,7 @@
 package dev.luminous.mod.commands.impl;
 
 import dev.luminous.core.Manager;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.CommandManager;
 import dev.luminous.core.impl.ConfigManager;
 import dev.luminous.mod.commands.Command;
@@ -19,12 +19,12 @@ public class SaveCommand extends Command {
 		if (parameters.length == 1) {
 			CommandManager.sendChatMessage("§fSaving config named " + parameters[0]);
 			ConfigManager.options = Manager.getFile(parameters[0] + ".cfg");
-			Alien.save();
+			Supernova.save();
 			ConfigManager.options = Manager.getFile("options.txt");
 		} else {
 			CommandManager.sendChatMessage("§fSaving..");
 		}
-		Alien.save();
+		Supernova.save();
 	}
 
 	@Override

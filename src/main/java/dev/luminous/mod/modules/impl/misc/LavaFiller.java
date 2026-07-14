@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.misc;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.utils.entity.EntityUtil;
 import dev.luminous.api.utils.entity.InventoryUtil;
 import dev.luminous.api.utils.math.Timer;
@@ -60,7 +60,7 @@ public class LavaFiller extends Module {
 
     private void tryPlaceBlock(BlockPos pos) {
         if (pos == null) return;
-        if (detectMining.getValue() && Alien.BREAK.isMining(pos)) return;
+        if (detectMining.getValue() && Supernova.BREAK.isMining(pos)) return;
         if (!(progress < blocksPer.getValue())) return;
         int block = getBlock();
         if (block == -1) return;

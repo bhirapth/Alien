@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.combat;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.MoveEvent;
 import dev.luminous.api.events.impl.UpdateWalkingPlayerEvent;
@@ -181,7 +181,7 @@ public class SelfTrap extends Module {
     }
     private void tryPlaceBlock(BlockPos pos) {
         if (pos == null) return;
-        if (detectMining.getValue() && Alien.BREAK.isMining(pos)) return;
+        if (detectMining.getValue() && Supernova.BREAK.isMining(pos)) return;
         if (!(progress < blocksPer.getValue())) return;
         int block = getBlock();
         if (block == -1) return;
@@ -230,7 +230,7 @@ public class SelfTrap extends Module {
 
     public BlockPos getHelperPos(BlockPos pos) {
         for (Direction i : Direction.values()) {
-            if (detectMining.getValue() && Alien.BREAK.isMining(pos.offset(i))) continue;
+            if (detectMining.getValue() && Supernova.BREAK.isMining(pos.offset(i))) continue;
             if (!BlockUtil.isStrictDirection(pos.offset(i), i.getOpposite())) continue;
             if (BlockUtil.canPlace(pos.offset(i))) return pos.offset(i);
         }

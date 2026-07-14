@@ -1,6 +1,6 @@
 package dev.luminous.core.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.PacketEvent;
 import dev.luminous.api.utils.Wrapper;
@@ -19,7 +19,7 @@ import java.util.ArrayDeque;
 public class ServerManager implements Wrapper {
 
     public ServerManager() {
-        Alien.EVENT_BUS.subscribe(this);
+        Supernova.EVENT_BUS.subscribe(this);
     }
     public int serverSideSlot;
 
@@ -89,11 +89,11 @@ public class ServerManager implements Wrapper {
         JelloUtil.updateJello();
         if (worldNull && mc.world != null) {
             FontSetting.INSTANCE.enable();
-            Alien.MODULE.onLogin();
+            Supernova.MODULE.onLogin();
             worldNull = false;
         } else if (!worldNull && mc.world == null) {
-            Alien.save();
-            Alien.MODULE.onLogout();
+            Supernova.save();
+            Supernova.MODULE.onLogout();
             worldNull = true;
         }
     }

@@ -1,6 +1,6 @@
 package dev.luminous.mod.commands.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.Manager;
 import dev.luminous.core.impl.CommandManager;
 import dev.luminous.core.impl.ConfigManager;
@@ -22,11 +22,11 @@ public class LoadCommand extends Command {
 		}
 		CommandManager.sendChatMessage("§fLoading..");
 		ConfigManager.options = Manager.getFile(parameters[0] + ".cfg");
-		Alien.CONFIG = new ConfigManager();
-		Alien.PREFIX = Alien.CONFIG.getString("prefix", Alien.PREFIX);
-		Alien.CONFIG.loadSettings();
+		Supernova.CONFIG = new ConfigManager();
+		Supernova.PREFIX = Supernova.CONFIG.getString("prefix", Supernova.PREFIX);
+		Supernova.CONFIG.loadSettings();
         ConfigManager.options = Manager.getFile("options.txt");
-		Alien.save();
+		Supernova.save();
 	}
 
 	@Override

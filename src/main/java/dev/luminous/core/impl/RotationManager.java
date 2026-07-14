@@ -1,6 +1,6 @@
 package dev.luminous.core.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.Event;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.eventbus.EventPriority;
@@ -22,7 +22,7 @@ import net.minecraft.util.math.Vec3d;
 
 public class RotationManager implements Wrapper {
     public RotationManager() {
-        Alien.EVENT_BUS.subscribe(this);
+        Supernova.EVENT_BUS.subscribe(this);
     }
     public float nextYaw;
     public float nextPitch;
@@ -35,7 +35,7 @@ public class RotationManager implements Wrapper {
     public static boolean lastGround;
 
     public void snapBack() {
-        mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.Full(mc.player.getX(), mc.player.getY(), mc.player.getZ(), Alien.ROTATION.rotationYaw, Alien.ROTATION.rotationPitch, mc.player.isOnGround()));
+        mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.Full(mc.player.getX(), mc.player.getY(), mc.player.getZ(), Supernova.ROTATION.rotationYaw, Supernova.ROTATION.rotationPitch, mc.player.isOnGround()));
     }
     public void lookAt(Vec3d directionVec) {
         rotationTo(directionVec);
@@ -58,7 +58,7 @@ public class RotationManager implements Wrapper {
     public void snapAt(Vec3d directionVec) {
         float[] angle = getRotation(directionVec);
         if (AntiCheat.INSTANCE.noSpamRotation.getValue()) {
-            if (MathHelper.angleBetween(angle[0], Alien.ROTATION.lastYaw) < AntiCheat.INSTANCE.fov.getValueFloat() && Math.abs(angle[1] - Alien.ROTATION.lastPitch) < AntiCheat.INSTANCE.fov.getValueFloat()) {
+            if (MathHelper.angleBetween(angle[0], Supernova.ROTATION.lastYaw) < AntiCheat.INSTANCE.fov.getValueFloat() && Math.abs(angle[1] - Supernova.ROTATION.lastPitch) < AntiCheat.INSTANCE.fov.getValueFloat()) {
                 return;
             }
         }
@@ -100,7 +100,7 @@ public class RotationManager implements Wrapper {
             event.setPitch(nextPitch);
         } else {
             RotateEvent event1 = new RotateEvent(event.getYaw(), event.getPitch());
-            Alien.EVENT_BUS.post(event1);
+            Supernova.EVENT_BUS.post(event1);
             event.setYaw(event1.getYaw());
             event.setPitch(event1.getPitch());
         }
@@ -122,7 +122,7 @@ public class RotationManager implements Wrapper {
     }
     private void updateNext() {
         RotateEvent rotateEvent = new RotateEvent(mc.player.getYaw(), mc.player.getPitch());
-        Alien.EVENT_BUS.post(rotateEvent);
+        Supernova.EVENT_BUS.post(rotateEvent);
         if (rotateEvent.isModified()) {
             nextYaw = rotateEvent.getYaw();
             nextPitch = rotateEvent.getPitch();
@@ -138,7 +138,7 @@ public class RotationManager implements Wrapper {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onLastRotation(RotateEvent event) {
         LookAtEvent lookAtEvent = new LookAtEvent();
-        Alien.EVENT_BUS.post(lookAtEvent);
+        Supernova.EVENT_BUS.post(lookAtEvent);
         if (lookAtEvent.getRotation()) {
             float[] newAngle = injectStep(new float[]{lookAtEvent.getYaw(), lookAtEvent.getPitch()}, lookAtEvent.getSpeed());
             event.setYaw(newAngle[0]);

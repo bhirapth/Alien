@@ -3,7 +3,7 @@ package dev.luminous.mod.modules.impl.movement;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.MoveEvent;
 import dev.luminous.api.utils.entity.MovementUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.client.BaritoneModule;
 import dev.luminous.mod.modules.settings.impl.BooleanSetting;
@@ -30,7 +30,7 @@ public class Strafe
     @EventHandler
     public void onStrafe(MoveEvent event) {
         if (BaritoneModule.isActive()) return;
-        if (mc.player.isSneaking() || HoleSnap.INSTANCE.isOn() || Speed.INSTANCE.isOn() || mc.player.isFallFlying() || Alien.PLAYER.insideBlock || mc.player.isInLava() || mc.player.isTouchingWater() || mc.player.getAbilities().flying)
+        if (mc.player.isSneaking() || HoleSnap.INSTANCE.isOn() || Speed.INSTANCE.isOn() || mc.player.isFallFlying() || Supernova.PLAYER.insideBlock || mc.player.isInLava() || mc.player.isTouchingWater() || mc.player.getAbilities().flying)
             return;
         if (!MovementUtil.isMoving()) {
             if (airStop.getValue()) {

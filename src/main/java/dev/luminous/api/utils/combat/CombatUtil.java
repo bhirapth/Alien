@@ -4,7 +4,7 @@ import dev.luminous.api.utils.Wrapper;
 import dev.luminous.api.utils.entity.EntityUtil;
 import dev.luminous.api.utils.math.Timer;
 import dev.luminous.api.utils.world.BlockUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.impl.client.AntiCheat;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -54,17 +54,17 @@ public class CombatUtil implements Wrapper {
             return;
         if (crystal != null) {
             CombatUtil.breakTimer.reset();
-            if (rotate && AntiCheat.INSTANCE.attackRotate.getValue()) Alien.ROTATION.lookAt(new Vec3d(crystal.getX(), crystal.getY() + 0.25, crystal.getZ()));
+            if (rotate && AntiCheat.INSTANCE.attackRotate.getValue()) Supernova.ROTATION.lookAt(new Vec3d(crystal.getX(), crystal.getY() + 0.25, crystal.getZ()));
             mc.getNetworkHandler().sendPacket(PlayerInteractEntityC2SPacket.attack(crystal, mc.player.isSneaking()));
             mc.player.resetLastAttackedTicks();
             EntityUtil.swingHand(Hand.MAIN_HAND, AntiCheat.INSTANCE.swingMode.getValue());
             if (rotate && AntiCheat.INSTANCE.snapBack.getValue()) {
-                Alien.ROTATION.snapBack();
+                Supernova.ROTATION.snapBack();
             }
         }
     }
     public static boolean isValid(Entity entity, double range) {
-        boolean invalid = entity == null || !entity.isAlive() || entity.equals(mc.player) || entity instanceof PlayerEntity player && Alien.FRIEND.isFriend(player) || mc.player.getPos().distanceTo(entity.getPos()) > range;
+        boolean invalid = entity == null || !entity.isAlive() || entity.equals(mc.player) || entity instanceof PlayerEntity player && Supernova.FRIEND.isFriend(player) || mc.player.getPos().distanceTo(entity.getPos()) > range;
 
         return !invalid;
     }

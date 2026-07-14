@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.client;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.PacketEvent;
 import dev.luminous.api.utils.math.Timer;
@@ -20,7 +20,7 @@ public class ServerApply extends Module {
     public ServerApply() {
         super("ServerApply", Category.Client);
         setChinese("服务器应用");
-        Alien.EVENT_BUS.subscribe(this);
+        Supernova.EVENT_BUS.subscribe(this);
         INSTANCE = this;
     }
 

@@ -1,6 +1,6 @@
 package dev.luminous.mod.commands.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.CommandManager;
 import dev.luminous.mod.commands.Command;
 
@@ -21,25 +21,25 @@ public class TradeCommand extends Command {
 		}
         switch (parameters[0]) {
             case "reset" -> {
-                Alien.TRADE.list.clear();
+                Supernova.TRADE.list.clear();
                 CommandManager.sendChatMessage("§fItems list got reset");
                 return;
             }
             case "list" -> {
-                if (Alien.TRADE.list.isEmpty()) {
+                if (Supernova.TRADE.list.isEmpty()) {
                     CommandManager.sendChatMessage("§fItems list is empty");
                     return;
                 }
 
-                for (String name : Alien.TRADE.list) {
+                for (String name : Supernova.TRADE.list) {
                     CommandManager.sendChatMessage("§a" + name);
                 }
                 return;
             }
             case "addkey" -> {
                 if (parameters.length == 2) {
-                    Alien.TRADE.add(parameters[1]);
-                    CommandManager.sendChatMessage("§f" + parameters[1] + (Alien.TRADE.inWhitelist(parameters[1]) ? " §ahas been added" : " §chas been removed"));
+                    Supernova.TRADE.add(parameters[1]);
+                    CommandManager.sendChatMessage("§f" + parameters[1] + (Supernova.TRADE.inWhitelist(parameters[1]) ? " §ahas been added" : " §chas been removed"));
                     return;
                 }
                 sendUsage();
@@ -47,8 +47,8 @@ public class TradeCommand extends Command {
             }
             case "addItem" -> {
                 if (parameters.length == 2) {
-                    Alien.TRADE.add("item.minecraft." + parameters[1]);
-                    CommandManager.sendChatMessage("§f" + parameters[1] + (Alien.TRADE.inWhitelist("item.minecraft." +parameters[1]) ? " §ahas been added" : " §chas been removed"));
+                    Supernova.TRADE.add("item.minecraft." + parameters[1]);
+                    CommandManager.sendChatMessage("§f" + parameters[1] + (Supernova.TRADE.inWhitelist("item.minecraft." +parameters[1]) ? " §ahas been added" : " §chas been removed"));
                     return;
                 }
                 sendUsage();
@@ -56,8 +56,8 @@ public class TradeCommand extends Command {
             }
             case "removeItem" -> {
                 if (parameters.length == 2) {
-                    Alien.TRADE.remove("item.minecraft." + parameters[1]);
-                    CommandManager.sendChatMessage("§f" + parameters[1] + (Alien.TRADE.inWhitelist("item.minecraft." +parameters[1]) ? " §ahas been added" : " §chas been removed"));
+                    Supernova.TRADE.remove("item.minecraft." + parameters[1]);
+                    CommandManager.sendChatMessage("§f" + parameters[1] + (Supernova.TRADE.inWhitelist("item.minecraft." +parameters[1]) ? " §ahas been added" : " §chas been removed"));
                     return;
                 }
                 sendUsage();
@@ -65,8 +65,8 @@ public class TradeCommand extends Command {
             }
             case "addBlock" -> {
                 if (parameters.length == 2) {
-                    Alien.TRADE.add("block.minecraft." + parameters[1]);
-                    CommandManager.sendChatMessage("§f" + parameters[1] + (Alien.TRADE.inWhitelist("item.minecraft." +parameters[1]) ? " §ahas been added" : " §chas been removed"));
+                    Supernova.TRADE.add("block.minecraft." + parameters[1]);
+                    CommandManager.sendChatMessage("§f" + parameters[1] + (Supernova.TRADE.inWhitelist("item.minecraft." +parameters[1]) ? " §ahas been added" : " §chas been removed"));
                     return;
                 }
                 sendUsage();
@@ -74,8 +74,8 @@ public class TradeCommand extends Command {
             }
             case "removeBlock" -> {
                 if (parameters.length == 2) {
-                    Alien.TRADE.remove("block.minecraft." + parameters[1]);
-                    CommandManager.sendChatMessage("§f" + parameters[1] + (Alien.TRADE.inWhitelist("item.minecraft." +parameters[1]) ? " §ahas been added" : " §chas been removed"));
+                    Supernova.TRADE.remove("block.minecraft." + parameters[1]);
+                    CommandManager.sendChatMessage("§f" + parameters[1] + (Supernova.TRADE.inWhitelist("item.minecraft." +parameters[1]) ? " §ahas been added" : " §chas been removed"));
                     return;
                 }
                 sendUsage();
@@ -83,8 +83,8 @@ public class TradeCommand extends Command {
             }
             case "removekey" -> {
                 if (parameters.length == 2) {
-                    Alien.TRADE.remove(parameters[1]);
-                    CommandManager.sendChatMessage("§f" + parameters[1] + (Alien.TRADE.inWhitelist(parameters[1]) ? " §ahas been added" : " §chas been removed"));
+                    Supernova.TRADE.remove(parameters[1]);
+                    CommandManager.sendChatMessage("§f" + parameters[1] + (Supernova.TRADE.inWhitelist(parameters[1]) ? " §ahas been added" : " §chas been removed"));
                     return;
                 }
                 sendUsage();
@@ -93,7 +93,7 @@ public class TradeCommand extends Command {
         }
 
         if (parameters.length == 1) {
-			CommandManager.sendChatMessage("§f" + parameters[0] + (Alien.TRADE.inWhitelist(parameters[0]) ? " §ais in whitelist" : " §cisn't in whitelist"));
+			CommandManager.sendChatMessage("§f" + parameters[0] + (Supernova.TRADE.inWhitelist(parameters[0]) ? " §ais in whitelist" : " §cisn't in whitelist"));
 			return;
 		}
 
@@ -107,7 +107,7 @@ public class TradeCommand extends Command {
 			List<String> correct = new ArrayList<>();
             List<String> list = List.of("addItem", "addBlock", "addkey", "removeItem", "removeBlock", "removekey", "list", "reset");
 			for (String x : list) {
-				if (input.equalsIgnoreCase(Alien.PREFIX + "trade") || x.toLowerCase().startsWith(input)) {
+				if (input.equalsIgnoreCase(Supernova.PREFIX + "trade") || x.toLowerCase().startsWith(input)) {
 					correct.add(x);
 				}
 			}

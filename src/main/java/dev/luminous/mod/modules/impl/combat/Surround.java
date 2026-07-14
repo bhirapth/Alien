@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.combat;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.LookAtEvent;
 import dev.luminous.api.events.impl.MoveEvent;
@@ -201,7 +201,7 @@ public class Surround extends Module {
 
     private void tryPlaceBlock(BlockPos pos) {
         if (pos == null) return;
-        if (detectMining.getValue() && Alien.BREAK.isMining(pos)) return;
+        if (detectMining.getValue() && Supernova.BREAK.isMining(pos)) return;
         if (!(progress < blocksPer.getValue())) return;
         int block = getBlock();
         if (block == -1) return;
@@ -231,18 +231,18 @@ public class Surround extends Module {
             doSwap(old);
         }
         if (rotate.getValue() && !yawStep.getValue() && AntiCheat.INSTANCE.snapBack.getValue()) {
-            Alien.ROTATION.snapBack();
+            Supernova.ROTATION.snapBack();
         }
         progress++;
         timer.reset();
     }
     private boolean faceVector(Vec3d directionVec) {
         if (!yawStep.getValue()) {
-            Alien.ROTATION.lookAt(directionVec);
+            Supernova.ROTATION.lookAt(directionVec);
             return true;
         } else {
             this.directionVec = directionVec;
-            if (Alien.ROTATION.inFov(directionVec, fov.getValueFloat())) {
+            if (Supernova.ROTATION.inFov(directionVec, fov.getValueFloat())) {
                 return true;
             }
         }
@@ -283,7 +283,7 @@ public class Surround extends Module {
 
     public BlockPos getHelperPos(BlockPos pos) {
         for (Direction i : Direction.values()) {
-            if (detectMining.getValue() && Alien.BREAK.isMining(pos.offset(i))) continue;
+            if (detectMining.getValue() && Supernova.BREAK.isMining(pos.offset(i))) continue;
             if (!BlockUtil.isStrictDirection(pos.offset(i), i.getOpposite())) continue;
             if (BlockUtil.canPlace(pos.offset(i))) return pos.offset(i);
         }

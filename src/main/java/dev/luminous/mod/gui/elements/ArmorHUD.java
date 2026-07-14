@@ -1,6 +1,6 @@
 package dev.luminous.mod.gui.elements;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.gui.clickgui.ClickGuiScreen;
 import dev.luminous.mod.modules.impl.client.HUD;
 import dev.luminous.core.impl.GuiManager;
@@ -22,8 +22,8 @@ public class ArmorHUD extends Tab {
 	public ArmorHUD() {
 		this.width = 80;
 		this.height = 34;
-		this.x = (int) Alien.CONFIG.getFloat("armor_x", 0);
-		this.y = (int) Alien.CONFIG.getFloat("armor_y", 200);
+		this.x = (int) Supernova.CONFIG.getFloat("armor_x", 0);
+		this.y = (int) Supernova.CONFIG.getFloat("armor_y", 200);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class ArmorHUD extends Tab {
 	public void draw(DrawContext drawContext, float partialTicks, Color color) {
 		MatrixStack matrixStack = drawContext.getMatrices();
 		if (HUD.INSTANCE.armor.getValue()) {
-			if (Alien.GUI.isClickGuiOpen()) {
+			if (Supernova.GUI.isClickGuiOpen()) {
 				Render2DUtil.drawRect(drawContext.getMatrices(), x, y, width, height, new Color(0, 0, 0, 70));
 			}
 			int xOff = 0;

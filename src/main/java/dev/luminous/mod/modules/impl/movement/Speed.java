@@ -6,7 +6,7 @@ import dev.luminous.api.events.impl.MoveEvent;
 import dev.luminous.api.events.impl.PacketEvent;
 import dev.luminous.api.utils.entity.MovementUtil;
 import dev.luminous.api.utils.math.Timer;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.client.BaritoneModule;
 import dev.luminous.mod.modules.settings.impl.BooleanSetting;
@@ -208,7 +208,7 @@ public class Speed extends Module {
         if (!this.inWater.getValue() && (mc.player.isSubmergedInWater() || mc.player.isTouchingWater() || mc.player.isInLava())
                 || mc.player.isRiding()
                 || mc.player.isHoldingOntoLadder()
-                || !inBlock.getValue() && Alien.PLAYER.insideBlock
+                || !inBlock.getValue() && Supernova.PLAYER.insideBlock
                 || mc.player.getAbilities().flying
                 || mc.player.isFallFlying()
                 || !MovementUtil.isMoving()) {

@@ -2,7 +2,7 @@ package dev.luminous.api.utils.world;
 
 import dev.luminous.api.utils.Wrapper;
 import dev.luminous.api.utils.entity.EntityUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.client.AntiCheat;
 import dev.luminous.mod.modules.impl.client.ClientSetting;
@@ -163,7 +163,7 @@ public class BlockUtil implements Wrapper {
         Direction facing = getClickSide(obsPos);
         Vec3d vec = obsPos.toCenterPos().add(facing.getVector().getX() * 0.5,facing.getVector().getY() * 0.5,facing.getVector().getZ() * 0.5);
         if (rotate) {
-            Alien.ROTATION.lookAt(vec);
+            Supernova.ROTATION.lookAt(vec);
         }
         clickBlock(obsPos, facing, false, offhand ? Hand.OFF_HAND : Hand.MAIN_HAND);
     }
@@ -200,7 +200,7 @@ public class BlockUtil implements Wrapper {
     public static void clickBlock(BlockPos pos, Direction side, boolean rotate, Hand hand, boolean packet) {
         Vec3d directionVec = new Vec3d(pos.getX() + 0.5 + side.getVector().getX() * 0.5, pos.getY() + 0.5 + side.getVector().getY() * 0.5, pos.getZ() + 0.5 + side.getVector().getZ() * 0.5);
         if (rotate) {
-            Alien.ROTATION.lookAt(directionVec);
+            Supernova.ROTATION.lookAt(directionVec);
         }
         EntityUtil.swingHand(hand, AntiCheat.INSTANCE.swingMode.getValue());
         BlockHitResult result = new BlockHitResult(directionVec, side, pos, false);
@@ -210,20 +210,20 @@ public class BlockUtil implements Wrapper {
             mc.interactionManager.interactBlock(mc.player, hand, result);
         }
         if (rotate && AntiCheat.INSTANCE.snapBack.getValue()) {
-            Alien.ROTATION.snapBack();
+            Supernova.ROTATION.snapBack();
         }
     }
 
     public static void clickBlock(BlockPos pos, Direction side, boolean rotate, Hand hand, SwingSide swingSide) {
         Vec3d directionVec = new Vec3d(pos.getX() + 0.5 + side.getVector().getX() * 0.5, pos.getY() + 0.5 + side.getVector().getY() * 0.5, pos.getZ() + 0.5 + side.getVector().getZ() * 0.5);
         if (rotate) {
-            Alien.ROTATION.lookAt(directionVec);
+            Supernova.ROTATION.lookAt(directionVec);
         }
         EntityUtil.swingHand(hand, swingSide);
         BlockHitResult result = new BlockHitResult(directionVec, side, pos, false);
         Module.sendSequencedPacket(id -> new PlayerInteractBlockC2SPacket(hand, result, id));
         if (rotate && AntiCheat.INSTANCE.snapBack.getValue()) {
-            Alien.ROTATION.snapBack();
+            Supernova.ROTATION.snapBack();
         }
     }
 

@@ -6,7 +6,7 @@ import dev.luminous.api.utils.entity.InventoryUtil;
 import dev.luminous.api.utils.entity.MovementUtil;
 import dev.luminous.api.utils.math.Timer;
 import dev.luminous.api.utils.world.BlockUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.CommandManager;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.client.AntiCheat;
@@ -291,7 +291,7 @@ public class PistonCrystal extends Module {
                     BlockPos neighbour = pos.offset(side);
                     Direction opposite = side.getOpposite();
                     if (rotate.getValue()) {
-                        Alien.ROTATION.lookAt(neighbour, opposite);
+                        Supernova.ROTATION.lookAt(neighbour, opposite);
                     }
                 }
             } else {

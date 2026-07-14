@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.misc;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.impl.client.ClientSetting;
 import dev.luminous.mod.modules.settings.impl.BooleanSetting;
 import dev.luminous.api.events.eventbus.EventHandler;
@@ -25,8 +25,8 @@ public class PopCounter
     @EventHandler
     public void onPlayerDeath(DeathEvent event) {
         PlayerEntity player = event.getPlayer();
-        if (Alien.POP.popContainer.containsKey(player.getName().getString())) {
-            int l_Count = Alien.POP.popContainer.get(player.getName().getString());
+        if (Supernova.POP.popContainer.containsKey(player.getName().getString())) {
+            int l_Count = Supernova.POP.popContainer.get(player.getName().getString());
             if (l_Count == 1) {
                 if (player.equals(mc.player)) {
                     sendMessage("§fYou§r died after popping " + "§f" + l_Count + "§r totem.", player.getId());
@@ -53,8 +53,8 @@ public class PopCounter
     public void onTotem(TotemEvent event) {
         PlayerEntity player = event.getPlayer();
         int l_Count = 1;
-        if (Alien.POP.popContainer.containsKey(player.getName().getString())) {
-            l_Count = Alien.POP.popContainer.get(player.getName().getString());
+        if (Supernova.POP.popContainer.containsKey(player.getName().getString())) {
+            l_Count = Supernova.POP.popContainer.get(player.getName().getString());
         }
         if (l_Count == 1) {
             if (player.equals(mc.player)) {

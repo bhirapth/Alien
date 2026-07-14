@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.impl.EntityVelocityUpdateEvent;
 import dev.luminous.api.events.impl.GameLeftEvent;
 import dev.luminous.api.events.impl.SendMessageEvent;
@@ -34,24 +34,24 @@ public abstract class MixinClientPlayNetworkHandler extends ClientCommonNetworkH
 
     @Inject(method = "onEnterReconfiguration", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/NetworkThreadUtils;forceMainThread(Lnet/minecraft/network/packet/Packet;Lnet/minecraft/network/listener/PacketListener;Lnet/minecraft/util/thread/ThreadExecutor;)V", shift = At.Shift.AFTER))
     private void onEnterReconfiguration(EnterReconfigurationS2CPacket packet, CallbackInfo info) {
-        Alien.EVENT_BUS.post(new GameLeftEvent());
+        Supernova.EVENT_BUS.post(new GameLeftEvent());
     }
 
     @Shadow
     private ClientWorld world;
 
     @Unique
-    private boolean alien$worldNotNull;
+    private boolean supernova$worldNotNull;
 
     @Inject(method = "onGameJoin", at = @At("HEAD"))
     private void onGameJoinHead(GameJoinS2CPacket packet, CallbackInfo info) {
-        alien$worldNotNull = world != null;
+        supernova$worldNotNull = world != null;
     }
 
     @Inject(method = "onGameJoin", at = @At("TAIL"))
     private void onGameJoinTail(GameJoinS2CPacket packet, CallbackInfo info) {
-        if (alien$worldNotNull) {
-            Alien.EVENT_BUS.post(new GameLeftEvent());
+        if (supernova$worldNotNull) {
+            Supernova.EVENT_BUS.post(new GameLeftEvent());
         }
     }
 
@@ -64,12 +64,12 @@ public abstract class MixinClientPlayNetworkHandler extends ClientCommonNetworkH
     @Inject(method = "sendChatMessage", at = @At("HEAD"), cancellable = true)
     private void onSendChatMessage(String message, CallbackInfo ci) {
         if (ignore) return;
-        if (message.startsWith(Alien.PREFIX)) {
-            Alien.COMMAND.command(message.split(" "));
+        if (message.startsWith(Supernova.PREFIX)) {
+            Supernova.COMMAND.command(message.split(" "));
             ci.cancel();
         } else {
             SendMessageEvent event = new SendMessageEvent(message);
-            Alien.EVENT_BUS.post(event);
+            Supernova.EVENT_BUS.post(event);
             if (event.isCancelled()) {
                 ci.cancel();
             } else if (!event.message.equals(event.defaultMessage)) {
@@ -88,7 +88,7 @@ public abstract class MixinClientPlayNetworkHandler extends ClientCommonNetworkH
         if (entity != null) {
             if (entity == MinecraftClient.getInstance().player) {
                 EntityVelocityUpdateEvent event = new EntityVelocityUpdateEvent();
-                Alien.EVENT_BUS.post(event);
+                Supernova.EVENT_BUS.post(event);
                 if (!event.isCancelled()) {
                     entity.setVelocityClient((double) packet.getVelocityX() / 8000.0, (double) packet.getVelocityY() / 8000.0, (double) packet.getVelocityZ() / 8000.0);
                 }
@@ -178,11 +178,11 @@ public abstract class MixinClientPlayNetworkHandler extends ClientCommonNetworkH
                 float j = packet.getYaw();
                 float k = packet.getPitch();
                 if (packet.getFlags().contains(PositionFlag.X_ROT)) {
-                    k = (Alien.ROTATION.lastYaw + k);
+                    k = (Supernova.ROTATION.lastYaw + k);
                 }
 
                 if (packet.getFlags().contains(PositionFlag.Y_ROT)) {
-                    j = (Alien.ROTATION.lastPitch + j);
+                    j = (Supernova.ROTATION.lastPitch + j);
                 }
                 this.connection.send(new TeleportConfirmC2SPacket(packet.getTeleportId()));
                 this.connection
@@ -190,7 +190,7 @@ public abstract class MixinClientPlayNetworkHandler extends ClientCommonNetworkH
             } else {
                 this.connection.send(new TeleportConfirmC2SPacket(packet.getTeleportId()));
                 this.connection
-                        .send(new PlayerMoveC2SPacket.Full(playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), Alien.ROTATION.rotationYaw, Alien.ROTATION.rotationPitch, false));
+                        .send(new PlayerMoveC2SPacket.Full(playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), Supernova.ROTATION.rotationYaw, Supernova.ROTATION.rotationPitch, false));
             }
         }
     }

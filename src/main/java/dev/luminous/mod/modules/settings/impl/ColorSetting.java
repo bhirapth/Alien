@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.settings.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.ModuleManager;
 import dev.luminous.api.utils.math.Timer;
 import dev.luminous.mod.modules.impl.client.Colors;
@@ -70,10 +70,10 @@ public class ColorSetting extends Setting {
 	}
 	@Override
 	public void loadSetting() {
-		this.value = new Color(Alien.CONFIG.getInt(this.getLine(), defaultValue.getRGB()), true);
-		this.isRainbow = Alien.CONFIG.getBoolean(this.getLine() + "Rainbow");
+		this.value = new Color(Supernova.CONFIG.getInt(this.getLine(), defaultValue.getRGB()), true);
+		this.isRainbow = Supernova.CONFIG.getBoolean(this.getLine() + "Rainbow");
 		if (injectBoolean) {
-			this.booleanValue = Alien.CONFIG.getBoolean(this.getLine() + "Boolean", defaultBooleanValue);
+			this.booleanValue = Supernova.CONFIG.getBoolean(this.getLine() + "Boolean", defaultBooleanValue);
 		}
 	}
 }

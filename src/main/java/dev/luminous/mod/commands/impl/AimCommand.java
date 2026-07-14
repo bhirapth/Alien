@@ -1,6 +1,6 @@
 package dev.luminous.mod.commands.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.CommandManager;
 import dev.luminous.mod.commands.Command;
 import net.minecraft.util.math.Vec3d;
@@ -71,7 +71,7 @@ public class AimCommand extends Command {
 			sendUsage();
 			return;
 		}
-		float[] angle = Alien.ROTATION.getRotation(new Vec3d(x, y, z));
+		float[] angle = Supernova.ROTATION.getRotation(new Vec3d(x, y, z));
 		mc.player.setYaw(angle[0]);
 		mc.player.setPitch(angle[1]);
 		DecimalFormat df = new DecimalFormat("0.0");

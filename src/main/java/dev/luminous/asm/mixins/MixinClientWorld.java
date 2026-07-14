@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.impl.EntitySpawnEvent;
 import dev.luminous.mod.modules.impl.render.Ambience;
 import dev.luminous.mod.modules.impl.render.NoRender;
@@ -34,7 +34,7 @@ public abstract class MixinClientWorld extends World {
     @Inject(method = "addEntity", at = @At("HEAD"), cancellable = true)
     public void onAddEntity(Entity entity, CallbackInfo ci) {
         EntitySpawnEvent event = new EntitySpawnEvent(entity);
-        Alien.EVENT_BUS.post(event);
+        Supernova.EVENT_BUS.post(event);
         if (event.isCancelled()) {
             ci.cancel();
         }

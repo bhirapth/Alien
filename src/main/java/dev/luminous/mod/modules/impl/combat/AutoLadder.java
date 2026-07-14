@@ -9,7 +9,7 @@ import dev.luminous.api.utils.entity.InventoryUtil;
 import dev.luminous.api.utils.math.Timer;
 import dev.luminous.api.utils.world.BlockPosX;
 import dev.luminous.api.utils.world.BlockUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.client.AntiCheat;
 import dev.luminous.mod.modules.impl.exploit.Blink;
@@ -180,7 +180,7 @@ public class AutoLadder extends Module {
         this.pos.add(pos);
         if (progress >= blocksPer.getValueInt()) return false;
         if (getLadderSlot() == -1) return false;
-        if (detectMining.getValue() && Alien.BREAK.isMining(pos)) return false;
+        if (detectMining.getValue() && Supernova.BREAK.isMining(pos)) return false;
 
         Direction attachSide = getLadderAttachSide(pos, facing);
         if (attachSide == null) return false;
@@ -239,18 +239,18 @@ public class AutoLadder extends Module {
         BlockHitResult result = new BlockHitResult(directionVec, facing, pos, false);
         Module.sendSequencedPacket(id -> new PlayerInteractBlockC2SPacket(Hand.MAIN_HAND, result, id));
         if (rotate.getValue() && !yawStep.getValue() && AntiCheat.INSTANCE.snapBack.getValue()) {
-            Alien.ROTATION.snapBack();
+            Supernova.ROTATION.snapBack();
         }
         return true;
     }
 
     private boolean faceVector(Vec3d directionVec) {
         if (!yawStep.getValue()) {
-            Alien.ROTATION.lookAt(directionVec);
+            Supernova.ROTATION.lookAt(directionVec);
             return true;
         } else {
             this.directionVec = directionVec;
-            if (Alien.ROTATION.inFov(directionVec, fov.getValueFloat())) {
+            if (Supernova.ROTATION.inFov(directionVec, fov.getValueFloat())) {
                 return true;
             }
         }

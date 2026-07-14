@@ -32,7 +32,7 @@ public class Debug extends Module {
 
     @Override
     public void onEnable() {
-        /*for (String s : IRCManager.onlineAlienUser) {
+        /*for (String s : IRCManager.onlineSupernovaUser) {
             CommandManager.sendChatMessage(s);
         }*/
         if (nullCheck()) return;

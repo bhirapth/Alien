@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.render;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.settings.impl.BooleanSetting;
 import dev.luminous.mod.modules.settings.impl.ColorSetting;
 import dev.luminous.mod.modules.settings.impl.EnumSetting;
@@ -85,7 +85,7 @@ public class Shader extends Module {
         if (entity instanceof PlayerEntity) {
             if (entity == mc.player)
                 return self.getValue();
-            if (Alien.FRIEND.isFriend((PlayerEntity) entity))
+            if (Supernova.FRIEND.isFriend((PlayerEntity) entity))
                 return friends.getValue();
             return players.getValue();
         }
@@ -105,16 +105,16 @@ public class Shader extends Module {
     @Override
     public void onRender3D(MatrixStack matrixStack) {
         if (hands.getValue())
-            Alien.SHADER.renderShader(()-> mc.gameRenderer.renderHand(matrixStack, mc.gameRenderer.getCamera(), mc.getTickDelta()), mode.getValue());
+            Supernova.SHADER.renderShader(()-> mc.gameRenderer.renderHand(matrixStack, mc.gameRenderer.getCamera(), mc.getTickDelta()), mode.getValue());
     }
 
     @Override
     public void onToggle() {
-        Alien.SHADER.reloadShaders();
+        Supernova.SHADER.reloadShaders();
     }
 
     @Override
     public void onLogin() {
-        Alien.SHADER.reloadShaders();
+        Supernova.SHADER.reloadShaders();
     }
 }

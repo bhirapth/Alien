@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.client;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.utils.render.TextUtil;
 import dev.luminous.mod.gui.font.FontRenderers;
 import dev.luminous.mod.modules.Module;
@@ -58,13 +58,13 @@ public class HUD extends Module {
     @Override
     public void onRender2D(DrawContext drawContext, float tickDelta) {
         if (armor.getValue()) {
-            Alien.GUI.armorHud.draw(drawContext, tickDelta, null);
+            Supernova.GUI.armorHud.draw(drawContext, tickDelta, null);
         }
         if (waterMark.getValue()) {
             if (pulse.booleanValue) {
-                TextUtil.drawStringPulse(drawContext, waterMarkString.getValue().replaceAll("%version%", Alien.VERSION).replaceAll("%hackname%", Alien.NAME), offset.getValueInt(), offset.getValueInt(), color.getValue(), pulse.getValue(), pulseSpeed.getValue(), pulseCounter.getValueInt(), customFont.getValue());
+                TextUtil.drawStringPulse(drawContext, waterMarkString.getValue().replaceAll("%version%", Supernova.VERSION).replaceAll("%hackname%", Supernova.NAME), offset.getValueInt(), offset.getValueInt(), color.getValue(), pulse.getValue(), pulseSpeed.getValue(), pulseCounter.getValueInt(), customFont.getValue());
             } else {
-                TextUtil.drawString(drawContext, waterMarkString.getValue().replaceAll("%version%", Alien.VERSION).replaceAll("%hackname%", Alien.NAME), offset.getValueInt(), offset.getValueInt(), color.getValue().getRGB(), customFont.getValue());
+                TextUtil.drawString(drawContext, waterMarkString.getValue().replaceAll("%version%", Supernova.VERSION).replaceAll("%hackname%", Supernova.NAME), offset.getValueInt(), offset.getValueInt(), color.getValue().getRGB(), customFont.getValue());
             }
         }
         int fontHeight = getHeight();
@@ -119,8 +119,8 @@ public class HUD extends Module {
             y -= height;
         }
         if (tps.getValue()) {
-            int x = getWidth("TPS " + Alien.SERVER.getTPS() + " [" + Alien.SERVER.getCurrentTPS() + "]");
-            drawText(drawContext, "TPS §f" + Alien.SERVER.getTPS() + " §7[§f" + Alien.SERVER.getCurrentTPS() + "§7]", windowWidth - x, y);
+            int x = getWidth("TPS " + Supernova.SERVER.getTPS() + " [" + Supernova.SERVER.getCurrentTPS() + "]");
+            drawText(drawContext, "TPS §f" + Supernova.SERVER.getTPS() + " §7[§f" + Supernova.SERVER.getCurrentTPS() + "§7]", windowWidth - x, y);
             y -= height;
         }
         if (speed.getValue()) {
@@ -129,7 +129,7 @@ public class HUD extends Module {
             double z = mc.player.getZ() - mc.player.prevZ;
             double dist = Math.sqrt(x * x + z * z) / 1000.0;
             double div = 0.05 / 3600.0;
-            float timer = Alien.TIMER.get();
+            float timer = Supernova.TIMER.get();
             final double speed = dist / div * timer;
             String text = String.format("Speed §f%skm/h",
                     decimal.format(speed));
@@ -138,8 +138,8 @@ public class HUD extends Module {
             y -= height;
         }
         if (fps.getValue()) {
-            int x = getWidth("FPS " + Alien.FPS.getFps());
-            drawText(drawContext, "FPS §f" + Alien.FPS.getFps(), windowWidth - x, y);
+            int x = getWidth("FPS " + Supernova.FPS.getFps());
+            drawText(drawContext, "FPS §f" + Supernova.FPS.getFps(), windowWidth - x, y);
             y -= height;
         }
         if (ping.getValue()) {

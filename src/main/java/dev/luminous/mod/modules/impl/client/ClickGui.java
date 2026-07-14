@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.client;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.GuiManager;
 import dev.luminous.api.utils.math.Easing;
 import dev.luminous.api.utils.math.FadeUtils;
@@ -70,7 +70,7 @@ public class ClickGui extends Module {
 	public void onEnable() {
 		//size = scale.getValue();
 		if (lastHeight != height.getValueInt()) {
-			for (ClickGuiTab tab : Alien.GUI.tabs) {
+			for (ClickGuiTab tab : Supernova.GUI.tabs) {
 				for (Component component : tab.getChildren()) {
 					if (component instanceof ModuleComponent moduleComponent) {
 						for (Component settingComponent : moduleComponent.getSettingsList()) {

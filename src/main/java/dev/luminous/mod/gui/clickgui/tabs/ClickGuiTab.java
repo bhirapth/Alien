@@ -1,6 +1,6 @@
 package dev.luminous.mod.gui.clickgui.tabs;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.utils.math.Animation;
 import dev.luminous.mod.gui.clickgui.components.Component;
 import dev.luminous.mod.gui.clickgui.components.impl.ModuleComponent;
@@ -26,8 +26,8 @@ public class ClickGuiTab extends Tab {
 
 	public ClickGuiTab(String title, int x, int y) {
 		this.title = title;
-		this.x = Alien.CONFIG.getInt(title + "_x", x);
-		this.y = Alien.CONFIG.getInt(title + "_y", y);
+		this.x = Supernova.CONFIG.getInt(title + "_x", x);
+		this.y = Supernova.CONFIG.getInt(title + "_y", y);
 		this.width = 98;
 		this.mc = MinecraftClient.getInstance();
 	}

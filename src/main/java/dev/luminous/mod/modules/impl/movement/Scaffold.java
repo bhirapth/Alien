@@ -13,7 +13,7 @@ import dev.luminous.api.utils.math.Timer;
 import dev.luminous.api.utils.render.ColorUtil;
 import dev.luminous.api.utils.render.Render3DUtil;
 import dev.luminous.api.utils.world.BlockUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.client.AntiCheat;
 import dev.luminous.mod.modules.settings.impl.BooleanSetting;
@@ -148,7 +148,7 @@ public class Scaffold extends Module {
             BlockUtil.placeBlock(placePos, false, packetPlace.getValue());
             InventoryUtil.switchToSlot(old);
             if (rotate.getValue() && AntiCheat.INSTANCE.snapBack.getValue()) {
-                Alien.ROTATION.snapBack();
+                Supernova.ROTATION.snapBack();
             }
             pos = placePos;
             if (tower.getValue() && mc.options.jumpKey.isPressed() && !MovementUtil.isMoving()) {
@@ -167,10 +167,10 @@ public class Scaffold extends Module {
 
     private boolean faceVector(Vec3d directionVec) {
         if (!yawStep.getValue()) {
-            Alien.ROTATION.lookAt(directionVec);
+            Supernova.ROTATION.lookAt(directionVec);
             return true;
         } else {
-            if (Alien.ROTATION.inFov(directionVec, fov.getValueFloat())) {
+            if (Supernova.ROTATION.inFov(directionVec, fov.getValueFloat())) {
                 return true;
             }
         }

@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.impl.client.ClientSetting;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.TimeoutException;
@@ -19,7 +19,7 @@ public class MixinClientConnection {
 	@Inject(at = { @At(value = "INVOKE", target = "Lnet/minecraft/network/ClientConnection;handlePacket(Lnet/minecraft/network/packet/Packet;Lnet/minecraft/network/listener/PacketListener;)V", ordinal = 0) }, method = "channelRead0(Lio/netty/channel/ChannelHandlerContext;Lnet/minecraft/network/packet/Packet;)V", cancellable = true)
 	protected void onChannelRead(ChannelHandlerContext channelHandlerContext, Packet<?> packet, CallbackInfo ci) {
 		PacketEvent event = new PacketEvent.Receive(packet);
-		Alien.EVENT_BUS.post(event);
+		Supernova.EVENT_BUS.post(event);
 		if (event.isCancelled()) {
 			ci.cancel();
 		}
@@ -28,7 +28,7 @@ public class MixinClientConnection {
 	@Inject(method = "send(Lnet/minecraft/network/packet/Packet;)V", at = @At("HEAD"),cancellable = true)
 	private void onSendPacketPre(Packet<?> packet, CallbackInfo info) {
 		PacketEvent.Send event = new PacketEvent.Send(packet);
-		Alien.EVENT_BUS.post(event);
+		Supernova.EVENT_BUS.post(event);
 		if (event.isCancelled()) {
 			info.cancel();
 		}
@@ -37,7 +37,7 @@ public class MixinClientConnection {
 	@Inject(method = "send(Lnet/minecraft/network/packet/Packet;)V", at = @At("TAIL"),cancellable = true)
 	private void onSendPacketPost(Packet<?> packet, CallbackInfo info) {
 		PacketEvent.SendPost event = new PacketEvent.SendPost(packet);
-		Alien.EVENT_BUS.post(event);
+		Supernova.EVENT_BUS.post(event);
 		if (event.isCancelled()) {
 			info.cancel();
 		}

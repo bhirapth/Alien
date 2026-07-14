@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.settings.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.ConfigManager;
 import dev.luminous.core.impl.ModuleManager;
 import dev.luminous.mod.modules.settings.Setting;
@@ -101,7 +101,7 @@ public class SliderSetting extends Setting {
 	}
 	@Override
 	public void loadSetting() {
-		setValue(Alien.CONFIG.getFloat(this.getLine(), (float) this.defaultValue));
+		setValue(Supernova.CONFIG.getFloat(this.getLine(), (float) this.defaultValue));
 	}
 
 	public String temp;

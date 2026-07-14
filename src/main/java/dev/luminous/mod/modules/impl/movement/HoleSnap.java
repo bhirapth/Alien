@@ -6,7 +6,7 @@ import dev.luminous.api.events.eventbus.EventPriority;
 import dev.luminous.api.events.impl.*;
 import dev.luminous.api.utils.entity.MovementUtil;
 import dev.luminous.api.utils.render.ColorUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.CommandManager;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.player.Freecam;
@@ -64,7 +64,7 @@ public class HoleSnap extends Module {
             return;
         }
         resetMove = false;
-        holePos = Alien.HOLE.getHole((float) range.getValue(), true, any.getValue(), up.getValue());
+        holePos = Supernova.HOLE.getHole((float) range.getValue(), true, any.getValue(), up.getValue());
     }
 
     @Override
@@ -107,7 +107,7 @@ public class HoleSnap extends Module {
 
     @Override
     public void onUpdate() {
-        holePos = Alien.HOLE.getHole((float) range.getValue(), true, any.getValue(), up.getValue());
+        holePos = Supernova.HOLE.getHole((float) range.getValue(), true, any.getValue(), up.getValue());
         if (holePos == null) {
             disable();
             return;
@@ -134,8 +134,8 @@ public class HoleSnap extends Module {
         }
         Vec3d playerPos = mc.player.getPos();
         targetPos = new Vec3d(holePos.getX() + 0.5, mc.player.getY(), holePos.getZ() + 0.5);
-        if (Alien.HOLE.isDoubleHole(holePos)) {
-            Direction facing = Alien.HOLE.is3Block(holePos);
+        if (Supernova.HOLE.isDoubleHole(holePos)) {
+            Direction facing = Supernova.HOLE.is3Block(holePos);
             if (facing != null) {
                 targetPos = targetPos.add(new Vec3d(facing.getVector().getX() * 0.5, facing.getVector().getY() * 0.5, facing.getVector().getZ() * 0.5));
             }
@@ -164,8 +164,8 @@ public class HoleSnap extends Module {
     public void onRotate(LookAtEvent event) {
         if (grim.getValue() && holePos != null) {
             targetPos = new Vec3d(holePos.getX() + 0.5, mc.player.getY(), holePos.getZ() + 0.5);
-            if (Alien.HOLE.isDoubleHole(holePos)) {
-                Direction facing = Alien.HOLE.is3Block(holePos);
+            if (Supernova.HOLE.isDoubleHole(holePos)) {
+                Direction facing = Supernova.HOLE.is3Block(holePos);
                 if (facing != null) {
                     targetPos = targetPos.add(new Vec3d(facing.getVector().getX() * 0.5, facing.getVector().getY() * 0.5, facing.getVector().getZ() * 0.5));
                 }
@@ -193,8 +193,8 @@ public class HoleSnap extends Module {
         }
         Vec3d playerPos = mc.player.getPos();
         targetPos = new Vec3d(holePos.getX() + 0.5, mc.player.getY(), holePos.getZ() + 0.5);
-        if (Alien.HOLE.isDoubleHole(holePos)) {
-            Direction facing = Alien.HOLE.is3Block(holePos);
+        if (Supernova.HOLE.isDoubleHole(holePos)) {
+            Direction facing = Supernova.HOLE.is3Block(holePos);
             if (facing != null) {
                 targetPos = targetPos.add(new Vec3d(facing.getVector().getX() * 0.5, facing.getVector().getY() * 0.5, facing.getVector().getZ() * 0.5));
             }

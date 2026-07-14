@@ -1,6 +1,6 @@
 package dev.luminous.api.utils.math;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.PlayerManager;
 import dev.luminous.api.utils.combat.CombatUtil;
 import dev.luminous.api.utils.world.BlockUtil;
@@ -60,7 +60,7 @@ public class ExplosionUtil implements Wrapper {
     public static float getBlastReduction(LivingEntity entity, float damageI) {
         float damage = damageI;
         if (entity instanceof PlayerEntity player) {
-            PlayerManager.EntityAttribute a = Alien.PLAYER.map.get(player);
+            PlayerManager.EntityAttribute a = Supernova.PLAYER.map.get(player);
             if (a == null) return 0;
             damage = getDamageAfterAbsorb(damage, a.armor(), (float) a.toughness());
             int k = getProtectionAmount(player.getArmorItems());

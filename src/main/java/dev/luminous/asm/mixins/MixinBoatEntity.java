@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.impl.BoatMoveEvent;
 import dev.luminous.mod.modules.impl.movement.EntityControl;
 import net.minecraft.entity.Entity;
@@ -29,7 +29,7 @@ public abstract class MixinBoatEntity extends Entity {
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/vehicle/BoatEntity;move(Lnet/minecraft/entity/MovementType;Lnet/minecraft/util/math/Vec3d;)V"), cancellable = true)
     private void onTickInvokeMove(CallbackInfo info) {
         BoatMoveEvent event = new BoatMoveEvent((BoatEntity) (Object) this);
-        Alien.EVENT_BUS.post(event);
+        Supernova.EVENT_BUS.post(event);
         if (event.isCancelled()) {
             info.cancel();
         }

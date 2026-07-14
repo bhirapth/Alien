@@ -4,7 +4,7 @@ import dev.luminous.api.events.Event;
 import dev.luminous.api.events.impl.JumpEvent;
 import dev.luminous.api.events.impl.TravelEvent;
 import dev.luminous.api.utils.Wrapper;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.impl.client.ClientSetting;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,12 +27,12 @@ public class MixinPlayerEntity implements Wrapper {
 
     @Inject(method = "jump", at = @At("HEAD"))
     private void onJumpPre(CallbackInfo ci) {
-        Alien.EVENT_BUS.post(new JumpEvent(Event.Stage.Pre));
+        Supernova.EVENT_BUS.post(new JumpEvent(Event.Stage.Pre));
     }
 
     @Inject(method = "jump", at = @At("RETURN"))
     private void onJumpPost(CallbackInfo ci) {
-        Alien.EVENT_BUS.post(new JumpEvent(Event.Stage.Post));
+        Supernova.EVENT_BUS.post(new JumpEvent(Event.Stage.Post));
     }
 
     @Inject(method = "travel", at = @At("HEAD"), cancellable = true)
@@ -42,11 +42,11 @@ public class MixinPlayerEntity implements Wrapper {
             return;
 
         TravelEvent event = new TravelEvent(Event.Stage.Pre, player);
-        Alien.EVENT_BUS.post(event);
+        Supernova.EVENT_BUS.post(event);
         if (event.isCancelled()) {
             ci.cancel();
             event = new TravelEvent(Event.Stage.Post, player);
-            Alien.EVENT_BUS.post(event);
+            Supernova.EVENT_BUS.post(event);
         }
     }
 
@@ -57,6 +57,6 @@ public class MixinPlayerEntity implements Wrapper {
             return;
 
         TravelEvent event = new TravelEvent(Event.Stage.Post, player);
-        Alien.EVENT_BUS.post(event);
+        Supernova.EVENT_BUS.post(event);
     }
 }

@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.render;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.BreakManager;
 import dev.luminous.api.utils.math.Easing;
 import dev.luminous.api.utils.render.ColorUtil;
@@ -34,7 +34,7 @@ public class BreakESP extends Module {
 
 	@Override
 	public void onRender3D(MatrixStack matrixStack) {
-		for (BreakManager.BreakData breakData : Alien.BREAK.breakMap.values()) {
+		for (BreakManager.BreakData breakData : Supernova.BREAK.breakMap.values()) {
 			if (breakData == null || breakData.getEntity() == null) continue;
 			double size = 0.5 * (1 - breakData.fade.ease(ease.getValue()));
 			Box cbox = new Box(breakData.pos).shrink(size, size, size).shrink(-size, -size, -size);

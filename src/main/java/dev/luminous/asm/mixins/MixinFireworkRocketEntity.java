@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.impl.RemoveFireworkEvent;
 import dev.luminous.api.utils.Wrapper;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
@@ -25,7 +25,7 @@ public class MixinFireworkRocketEntity implements Wrapper {
     private void hookTickPre(CallbackInfo ci) {
         FireworkRocketEntity rocketEntity = ((FireworkRocketEntity) (Object) this);
         RemoveFireworkEvent removeFireworkEvent = new RemoveFireworkEvent(rocketEntity);
-        Alien.EVENT_BUS.post(removeFireworkEvent);
+        Supernova.EVENT_BUS.post(removeFireworkEvent);
         if (removeFireworkEvent.isCancelled()) {
             ci.cancel();
             if (life == 0 && !rocketEntity.isSilent()) {

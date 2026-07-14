@@ -1,6 +1,6 @@
 package dev.luminous.core.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.PacketEvent;
 import dev.luminous.api.utils.Wrapper;
@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class BreakManager implements Wrapper {
     public BreakManager() {
-        Alien.EVENT_BUS.subscribe(this);
+        Supernova.EVENT_BUS.subscribe(this);
     }
     public final ConcurrentHashMap<Integer, BreakData> breakMap = new ConcurrentHashMap<>();
 

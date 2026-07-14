@@ -1,6 +1,6 @@
 package dev.luminous.mod.commands.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.CommandManager;
 import dev.luminous.mod.commands.Command;
 import dev.luminous.mod.modules.Module;
@@ -18,7 +18,7 @@ public class BindsCommand extends Command {
 	@Override
 	public void runCommand(String[] parameters) {
 		List<String> list = new ArrayList<>();
-		for (Module x : Alien.MODULE.modules) {
+		for (Module x : Supernova.MODULE.modules) {
 			if (x.getBind().getKey() != -1) {
 				list.add("§f" + x.getDisplayName() + " §7- §e" + x.getBind().getBind());
 			}

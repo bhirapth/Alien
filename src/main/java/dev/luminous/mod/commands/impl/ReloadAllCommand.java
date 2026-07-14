@@ -1,6 +1,6 @@
 package dev.luminous.mod.commands.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.CommandManager;
 import dev.luminous.mod.commands.Command;
 
@@ -15,9 +15,9 @@ public class ReloadAllCommand extends Command {
 	@Override
 	public void runCommand(String[] parameters) {
 		CommandManager.sendChatMessage("§fReloading..");
-		Alien.unload();
+		Supernova.unload();
         try {
-            Alien.load();
+            Supernova.load();
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }

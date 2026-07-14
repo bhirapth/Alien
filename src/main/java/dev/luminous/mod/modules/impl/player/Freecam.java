@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.player;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.eventbus.EventPriority;
 import dev.luminous.api.events.impl.KeyboardInputEvent;
@@ -71,7 +71,7 @@ public class Freecam extends Module {
     @Override
     public void onUpdate() {
         if (rotate.getValue() && mc.crosshairTarget != null && mc.crosshairTarget.getPos() != null) {
-            float[] angle = Alien.ROTATION.getRotation(mc.crosshairTarget.getPos());
+            float[] angle = Supernova.ROTATION.getRotation(mc.crosshairTarget.getPos());
             preYaw = angle[0];
             prePitch = angle[1];
         }

@@ -16,7 +16,7 @@ import dev.luminous.api.utils.render.Render3DUtil;
 import dev.luminous.api.utils.world.BlockPosX;
 import dev.luminous.api.utils.world.BlockUtil;
 import dev.luminous.asm.accessors.IEntity;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.client.AntiCheat;
 import dev.luminous.mod.modules.impl.client.ClientSetting;
@@ -161,7 +161,7 @@ public class AutoCrystal extends Module {
         super("AutoCrystal", Category.Combat);
         setChinese("自动水晶");
         INSTANCE = this;
-        Alien.EVENT_BUS.subscribe(new CrystalRender());
+        Supernova.EVENT_BUS.subscribe(new CrystalRender());
     }
 
     public static boolean canSee(Vec3d from, Vec3d to) {
@@ -582,7 +582,7 @@ public class AutoCrystal extends Module {
                 mc.world.removeEntity(entity.getId(), Entity.RemovalReason.KILLED);
             }
             if (crystalPos != null && displayTarget != null && lastDamage >= getDamage(displayTarget) && afterBreak.getValue()) {
-                if (!yawStep.getValue() || !checkFov.getValue() || Alien.ROTATION.inFov(entity.getPos(), fov.getValueFloat())) {
+                if (!yawStep.getValue() || !checkFov.getValue() || Supernova.ROTATION.inFov(entity.getPos(), fov.getValueFloat())) {
                     doPlace(crystalPos);
                 }
             }
@@ -590,7 +590,7 @@ public class AutoCrystal extends Module {
                 AutoWeb.force = true;
             }
             if (rotate.getValue() && !yawStep.getValue() && AntiCheat.INSTANCE.snapBack.getValue()) {
-                Alien.ROTATION.snapBack();
+                Supernova.ROTATION.snapBack();
             }
            return;
         }
@@ -664,11 +664,11 @@ public class AutoCrystal extends Module {
 
     private boolean faceVector(Vec3d directionVec) {
         if (!yawStep.getValue()) {
-            Alien.ROTATION.lookAt(directionVec);
+            Supernova.ROTATION.lookAt(directionVec);
             return true;
         } else {
             this.directionVec = directionVec;
-            if (Alien.ROTATION.inFov(directionVec, fov.getValueFloat())) {
+            if (Supernova.ROTATION.inFov(directionVec, fov.getValueFloat())) {
                 return true;
             }
         }

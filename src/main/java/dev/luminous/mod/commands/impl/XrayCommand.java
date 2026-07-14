@@ -1,6 +1,6 @@
 package dev.luminous.mod.commands.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.CommandManager;
 import dev.luminous.mod.commands.Command;
 
@@ -21,25 +21,25 @@ public class XrayCommand extends Command {
 		}
         switch (parameters[0]) {
             case "reset" -> {
-                Alien.XRAY.list.clear();
+                Supernova.XRAY.list.clear();
                 CommandManager.sendChatMessage("§fBlocks list got reset");
                 return;
             }
             case "list" -> {
-                if (Alien.XRAY.list.isEmpty()) {
+                if (Supernova.XRAY.list.isEmpty()) {
                     CommandManager.sendChatMessage("§fBlocks list is empty");
                     return;
                 }
 
-                for (String name : Alien.XRAY.list) {
+                for (String name : Supernova.XRAY.list) {
                     CommandManager.sendChatMessage("§a" + name);
                 }
                 return;
             }
             case "addkey" -> {
                 if (parameters.length == 2) {
-                    Alien.XRAY.add(parameters[1]);
-                    CommandManager.sendChatMessage("§f" + parameters[1] + (Alien.XRAY.inWhitelist(parameters[1]) ? " §ahas been added" : " §chas been removed"));
+                    Supernova.XRAY.add(parameters[1]);
+                    CommandManager.sendChatMessage("§f" + parameters[1] + (Supernova.XRAY.inWhitelist(parameters[1]) ? " §ahas been added" : " §chas been removed"));
                     return;
                 }
                 sendUsage();
@@ -47,8 +47,8 @@ public class XrayCommand extends Command {
             }
             case "add" -> {
                 if (parameters.length == 2) {
-                    Alien.XRAY.add("block.minecraft." + parameters[1]);
-                    CommandManager.sendChatMessage("§f" + parameters[1] + (Alien.XRAY.inWhitelist("block.minecraft." +parameters[1]) ? " §ahas been added" : " §chas been removed"));
+                    Supernova.XRAY.add("block.minecraft." + parameters[1]);
+                    CommandManager.sendChatMessage("§f" + parameters[1] + (Supernova.XRAY.inWhitelist("block.minecraft." +parameters[1]) ? " §ahas been added" : " §chas been removed"));
                     return;
                 }
                 sendUsage();
@@ -56,8 +56,8 @@ public class XrayCommand extends Command {
             }
             case "remove" -> {
                 if (parameters.length == 2) {
-                    Alien.XRAY.remove("block.minecraft." + parameters[1]);
-                    CommandManager.sendChatMessage("§f" + parameters[1] + (Alien.XRAY.inWhitelist("block.minecraft." +parameters[1]) ? " §ahas been added" : " §chas been removed"));
+                    Supernova.XRAY.remove("block.minecraft." + parameters[1]);
+                    CommandManager.sendChatMessage("§f" + parameters[1] + (Supernova.XRAY.inWhitelist("block.minecraft." +parameters[1]) ? " §ahas been added" : " §chas been removed"));
                     return;
                 }
                 sendUsage();
@@ -65,8 +65,8 @@ public class XrayCommand extends Command {
             }
             case "removekey" -> {
                 if (parameters.length == 2) {
-                    Alien.XRAY.remove(parameters[1]);
-                    CommandManager.sendChatMessage("§f" + parameters[1] + (Alien.XRAY.inWhitelist(parameters[1]) ? " §ahas been added" : " §chas been removed"));
+                    Supernova.XRAY.remove(parameters[1]);
+                    CommandManager.sendChatMessage("§f" + parameters[1] + (Supernova.XRAY.inWhitelist(parameters[1]) ? " §ahas been added" : " §chas been removed"));
                     return;
                 }
                 sendUsage();
@@ -75,7 +75,7 @@ public class XrayCommand extends Command {
         }
 
         if (parameters.length == 1) {
-			CommandManager.sendChatMessage("§f" + parameters[0] + (Alien.XRAY.inWhitelist(parameters[0]) ? " §ais in whitelist" : " §cisn't in whitelist"));
+			CommandManager.sendChatMessage("§f" + parameters[0] + (Supernova.XRAY.inWhitelist(parameters[0]) ? " §ais in whitelist" : " §cisn't in whitelist"));
 			return;
 		}
 
@@ -89,7 +89,7 @@ public class XrayCommand extends Command {
 			List<String> correct = new ArrayList<>();
 			List<String> list = List.of("add", "addkey", "remove", "removekey", "list", "reset");
 			for (String x : list) {
-				if (input.equalsIgnoreCase(Alien.PREFIX + "xray") || x.toLowerCase().startsWith(input)) {
+				if (input.equalsIgnoreCase(Supernova.PREFIX + "xray") || x.toLowerCase().startsWith(input)) {
 					correct.add(x);
 				}
 			}

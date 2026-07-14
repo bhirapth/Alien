@@ -1,7 +1,7 @@
 package dev.luminous.core.impl;
 
 import com.google.common.base.Splitter;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.Manager;
 import dev.luminous.mod.gui.clickgui.tabs.ClickGuiTab;
 import dev.luminous.mod.modules.Module;
@@ -27,16 +27,16 @@ public class ConfigManager extends Manager {
 	}
 
 	public static void resetModule() {
-		for (Module module : Alien.MODULE.modules) {
+		for (Module module : Supernova.MODULE.modules) {
 			module.setState(false);
 		}
 	}
 	public void loadSettings() {
-		for (Module module : Alien.MODULE.modules) {
+		for (Module module : Supernova.MODULE.modules) {
 			for (Setting setting : module.getSettings()) {
 				setting.loadSetting();
 			}
-			module.setState(Alien.CONFIG.getBoolean(module.getName() + "_state", module instanceof HUD || module instanceof ModuleList));
+			module.setState(Supernova.CONFIG.getBoolean(module.getName() + "_state", module instanceof HUD || module instanceof ModuleList));
 		}
 	}
 	public void saveSettings() {
@@ -44,16 +44,16 @@ public class ConfigManager extends Manager {
 		try {
 			printwriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(options), StandardCharsets.UTF_8));
 
-			printwriter.println("prefix:" + Alien.PREFIX);
+			printwriter.println("prefix:" + Supernova.PREFIX);
 
-			for (ClickGuiTab tab : Alien.GUI.tabs) {
+			for (ClickGuiTab tab : Supernova.GUI.tabs) {
 				printwriter.println(tab.getTitle() + "_x:" + tab.getX());
 				printwriter.println(tab.getTitle() + "_y:" + tab.getY());
 			}
-			printwriter.println("armor_x:" + Alien.GUI.armorHud.getX());
-			printwriter.println("armor_y:" + Alien.GUI.armorHud.getY());
+			printwriter.println("armor_x:" + Supernova.GUI.armorHud.getX());
+			printwriter.println("armor_y:" + Supernova.GUI.armorHud.getY());
 
-			for (Module module : Alien.MODULE.modules) {
+			for (Module module : Supernova.MODULE.modules) {
 				for (Setting setting : module.getSettings()) {
 					if (setting instanceof BooleanSetting bs) {
 						printwriter.println(bs.getLine() + ":" + bs.getValue());
@@ -77,7 +77,7 @@ public class ConfigManager extends Manager {
 				printwriter.println(module.getName() + "_state:" + module.isOn());
 			}
 		} catch (Exception exception) {
-			System.out.println("[" + Alien.NAME + "] Failed to save settings");
+			System.out.println("[" + Supernova.NAME + "] Failed to save settings");
 		} finally {
 			IOUtils.closeQuietly(printwriter);
 		}
@@ -100,7 +100,7 @@ public class ConfigManager extends Manager {
 			}
 			//KeyBinding.updateKeysByCode();
 		} catch (Exception exception) {
-			System.out.println("[" + Alien.NAME + "] Failed to load settings");
+			System.out.println("[" + Supernova.NAME + "] Failed to load settings");
 		}
 	}
 

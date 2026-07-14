@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.movement;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.eventbus.EventPriority;
 import dev.luminous.api.events.impl.RotateEvent;
@@ -58,14 +58,14 @@ public class Sprint extends Module {
 					if (MoveFix.INSTANCE.isOn()) {
 						return mc.player.input.movementForward == 1;
 					} else {
-						return HoleSnap.INSTANCE.isOn() || mc.options.forwardKey.isPressed() && MathHelper.angleBetween(mc.player.getYaw(), Alien.ROTATION.rotationYaw) < 40;
+						return HoleSnap.INSTANCE.isOn() || mc.options.forwardKey.isPressed() && MathHelper.angleBetween(mc.player.getYaw(), Supernova.ROTATION.rotationYaw) < 40;
 					}
 				}
 				case Rotation -> {
 					if (MoveFix.INSTANCE.isOn()) {
 						return mc.player.input.movementForward == 1;
 					} else {
-						return HoleSnap.INSTANCE.isOn() || MathHelper.angleBetween(getSprintYaw(mc.player.getYaw()), Alien.ROTATION.rotationYaw) < 40;
+						return HoleSnap.INSTANCE.isOn() || MathHelper.angleBetween(getSprintYaw(mc.player.getYaw()), Supernova.ROTATION.rotationYaw) < 40;
 					}
 				}
 				case Rage -> {

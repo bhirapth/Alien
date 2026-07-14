@@ -1,6 +1,6 @@
 package dev.luminous.core.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.Manager;
 import net.minecraft.item.Items;
 import org.apache.commons.io.IOUtils;
@@ -54,7 +54,7 @@ public class TradeManager extends Manager {
             }
             printwriter.close();
         } catch (Exception exception) {
-            System.out.println("[" + Alien.NAME + "] Failed to save tradess");
+            System.out.println("[" + Supernova.NAME + "] Failed to save tradess");
         }
     }
 }

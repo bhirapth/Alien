@@ -1,7 +1,7 @@
 package dev.luminous.core.impl;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.impl.Render3DEvent;
 import dev.luminous.api.utils.Wrapper;
 import dev.luminous.mod.Mod;
@@ -279,7 +279,7 @@ public class ModuleManager implements Wrapper {
         RenderSystem.disableDepthTest();
         matrixStack.push();
         modules.stream().filter(Module::isOn).forEach(module -> module.onRender3D(matrixStack));
-        Alien.EVENT_BUS.post(new Render3DEvent(matrixStack, mc.getTickDelta()));
+        Supernova.EVENT_BUS.post(new Render3DEvent(matrixStack, mc.getTickDelta()));
         matrixStack.pop();
         RenderSystem.enableDepthTest();
         GL11.glDisable(GL11.GL_BLEND);

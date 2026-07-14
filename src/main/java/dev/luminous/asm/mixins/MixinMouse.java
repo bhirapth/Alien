@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.impl.MouseUpdateEvent;
 import dev.luminous.mod.gui.clickgui.ClickGuiScreen;
 import net.minecraft.client.Mouse;
@@ -15,19 +15,19 @@ public class MixinMouse {
     @Inject(method = "onMouseButton", at = @At("HEAD"))
     private void onMouse(long window, int button, int action, int mods, CallbackInfo ci) {
         int key = -(button + 2);
-        if (mc.currentScreen instanceof ClickGuiScreen && action == 1 && Alien.MODULE.setBind(key)) {
+        if (mc.currentScreen instanceof ClickGuiScreen && action == 1 && Supernova.MODULE.setBind(key)) {
             return;
         }
         if (action == 1) {
-            Alien.MODULE.onKeyPressed(key);
+            Supernova.MODULE.onKeyPressed(key);
         }
         if (action == 0) {
-            Alien.MODULE.onKeyReleased(key);
+            Supernova.MODULE.onKeyReleased(key);
         }
     }
 
     @Inject(method = "updateMouse", at = @At("RETURN"))
     private void updateHook(CallbackInfo ci) {
-        Alien.EVENT_BUS.post(new MouseUpdateEvent());
+        Supernova.EVENT_BUS.post(new MouseUpdateEvent());
     }
 }

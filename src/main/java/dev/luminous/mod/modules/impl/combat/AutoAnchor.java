@@ -1,7 +1,7 @@
 package dev.luminous.mod.modules.impl.combat;
 
 import com.mojang.authlib.GameProfile;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.LookAtEvent;
 import dev.luminous.api.events.impl.Render3DEvent;
@@ -145,7 +145,7 @@ public class AutoAnchor extends Module {
 		super("AutoAnchor", Category.Combat);
 		setChinese("自动重生锚");
 		INSTANCE = this;
-		Alien.EVENT_BUS.subscribe(new AnchorRender());
+		Supernova.EVENT_BUS.subscribe(new AnchorRender());
 	}
 	public PlayerEntity displayTarget;
 	@Override
@@ -213,7 +213,7 @@ public class AutoAnchor extends Module {
 		if (Blink.INSTANCE.isOn() && Blink.INSTANCE.pauseModule.getValue()) return;
 		if (currentPos != null) {
 			if (breakCrystal.getValue()) CombatUtil.attackCrystal(new BlockPos(currentPos), rotate.getValue(), false);
-			boolean shouldSpam = this.spam.getValue() && (!mineSpam.getValue() || Alien.BREAK.isMining(currentPos, false));
+			boolean shouldSpam = this.spam.getValue() && (!mineSpam.getValue() || Supernova.BREAK.isMining(currentPos, false));
 			if (shouldSpam) {
 				if (!delayTimer.passed((long) (spamDelay.getValueFloat()))) {
 					return;
@@ -233,7 +233,7 @@ public class AutoAnchor extends Module {
 					if (yawStep.getValue() && checkFov.getValue()) {
 						Direction side = getClickSide(currentPos);
 						Vec3d directionVec = new Vec3d(currentPos.getX() + 0.5 + side.getVector().getX() * 0.5, currentPos.getY() + 0.5 + side.getVector().getY() * 0.5, currentPos.getZ() + 0.5 + side.getVector().getZ() * 0.5);
-						if (Alien.ROTATION.inFov(directionVec, fov.getValueFloat())) {
+						if (Supernova.ROTATION.inFov(directionVec, fov.getValueFloat())) {
 							CombatUtil.modifyPos = currentPos;
 							CombatUtil.modifyBlockState = Blocks.AIR.getDefaultState();
 							placeBlock(currentPos, rotate.getValue(), anchor);
@@ -272,7 +272,7 @@ public class AutoAnchor extends Module {
 							if (yawStep.getValue() && checkFov.getValue()) {
 								Direction side = getClickSide(currentPos);
 								Vec3d directionVec = new Vec3d(currentPos.getX() + 0.5 + side.getVector().getX() * 0.5, currentPos.getY() + 0.5 + side.getVector().getY() * 0.5, currentPos.getZ() + 0.5 + side.getVector().getZ() * 0.5);
-								if (Alien.ROTATION.inFov(directionVec, fov.getValueFloat())) {
+								if (Supernova.ROTATION.inFov(directionVec, fov.getValueFloat())) {
 								CombatUtil.modifyPos = currentPos;
 								CombatUtil.modifyBlockState = Blocks.AIR.getDefaultState();
 								placeBlock(currentPos, rotate.getValue(), anchor);
@@ -423,11 +423,11 @@ public class AutoAnchor extends Module {
 	}
 	public boolean faceVector(Vec3d directionVec) {
 		if (!yawStep.getValue()) {
-			Alien.ROTATION.lookAt(directionVec);
+			Supernova.ROTATION.lookAt(directionVec);
 			return true;
 		} else {
 			this.directionVec = directionVec;
-			if (Alien.ROTATION.inFov(directionVec, fov.getValueFloat())) {
+			if (Supernova.ROTATION.inFov(directionVec, fov.getValueFloat())) {
 				return true;
 			}
 		}
@@ -586,7 +586,7 @@ public class AutoAnchor extends Module {
 
 	public BlockPos getHelper(BlockPos pos) {
 		for (Direction i : Direction.values()) {
-			if (checkMine.getValue() && Alien.BREAK.isMining(pos.offset(i))) continue;
+			if (checkMine.getValue() && Supernova.BREAK.isMining(pos.offset(i))) continue;
 			if (!BlockUtil.isStrictDirection(pos.offset(i), i.getOpposite())) continue;
 			if (BlockUtil.canPlace(pos.offset(i))) return pos.offset(i);
 		}

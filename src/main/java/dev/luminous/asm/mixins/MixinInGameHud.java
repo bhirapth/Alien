@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.impl.client.ClientSetting;
 import dev.luminous.mod.modules.impl.player.freelook.CameraState;
 import dev.luminous.mod.modules.impl.player.freelook.FreeLook;
@@ -40,7 +40,7 @@ public class MixinInGameHud {
 
 	@Inject(at = {@At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;enableBlend()V", remap = false, ordinal = 3)}, method = {"render(Lnet/minecraft/client/gui/DrawContext;F)V"})
 	private void onRender(DrawContext context, float tickDelta, CallbackInfo ci) {
-		Alien.MODULE.render2D(context);
+		Supernova.MODULE.render2D(context);
 	}
 
 	@Inject(method = "clear", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/ChatHud;clear(Z)V"), cancellable = true)

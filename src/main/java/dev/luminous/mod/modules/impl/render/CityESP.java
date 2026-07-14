@@ -5,7 +5,7 @@ import dev.luminous.api.utils.entity.EntityUtil;
 import dev.luminous.api.utils.render.Render3DUtil;
 import dev.luminous.api.utils.world.BlockPosX;
 import dev.luminous.api.utils.world.BlockUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.client.AntiCheat;
 import dev.luminous.mod.modules.settings.impl.BooleanSetting;
@@ -56,7 +56,7 @@ public class CityESP extends Module {
 
 			if (surround.getValue()) {
 				BlockPos pos = EntityUtil.getEntityPos(player, true);
-				if (!Alien.HOLE.isHole(pos)) continue;
+				if (!Supernova.HOLE.isHole(pos)) continue;
 				for (Direction i : Direction.values()) {
 					if (i == Direction.UP || i == Direction.DOWN) continue;
 					if (isObsidian(pos.offset(i))) {

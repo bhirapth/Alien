@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.settings.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.ModuleManager;
 import dev.luminous.mod.modules.settings.Setting;
 import org.lwjgl.glfw.GLFW;
@@ -29,8 +29,8 @@ public class BindSetting extends Setting {
 
     @Override
     public void loadSetting() {
-        setKey(Alien.CONFIG.getInt(getLine(), defaultKey));
-        setHoldEnable(Alien.CONFIG.getBoolean(getLine() + "_hold"));
+        setKey(Supernova.CONFIG.getInt(getLine(), defaultKey));
+        setHoldEnable(Supernova.CONFIG.getBoolean(getLine() + "_hold"));
     }
 
     public int getKey() {

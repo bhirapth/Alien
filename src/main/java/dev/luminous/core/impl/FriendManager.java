@@ -1,7 +1,7 @@
 package dev.luminous.core.impl;
 
 import dev.luminous.core.Manager;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import net.minecraft.entity.player.PlayerEntity;
 import org.apache.commons.io.IOUtils;
 
@@ -63,7 +63,7 @@ public class FriendManager extends Manager {
             }
             printwriter.close();
         } catch (Exception exception) {
-            System.out.println("[" + Alien.NAME + "] Failed to save friends");
+            System.out.println("[" + Supernova.NAME + "] Failed to save friends");
         }
     }
     

@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.impl.player.InteractTweaks;
 import dev.luminous.api.events.impl.ClickBlockEvent;
 import net.minecraft.client.MinecraftClient;
@@ -58,7 +58,7 @@ public class MixinClientPlayerInteractionManager {
 	private void syncSlotHook(CallbackInfo ci) {
 		ci.cancel();
 		int i = this.client.player.getInventory().selectedSlot;
-		if (i != Alien.SERVER.serverSideSlot) {
+		if (i != Supernova.SERVER.serverSideSlot) {
 			this.lastSelectedSlot = i;
 			this.networkHandler.sendPacket(new UpdateSelectedSlotC2SPacket(this.lastSelectedSlot));
 		}
@@ -72,7 +72,7 @@ public class MixinClientPlayerInteractionManager {
 	@Inject(method = "attackBlock", at = @At("HEAD"), cancellable = true)
 	private void onAttackBlock(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
 		ClickBlockEvent event = new ClickBlockEvent(pos, direction);
-		Alien.EVENT_BUS.post(event);
+		Supernova.EVENT_BUS.post(event);
 		if (event.isCancelled()) {
 			cir.setReturnValue(false);
 		}

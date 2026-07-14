@@ -7,7 +7,7 @@ import dev.luminous.api.events.impl.TimerEvent;
 import dev.luminous.api.utils.entity.MovementUtil;
 import dev.luminous.api.utils.math.Timer;
 import dev.luminous.api.utils.world.BlockPosX;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.settings.impl.BooleanSetting;
 import dev.luminous.mod.modules.settings.impl.EnumSetting;
@@ -83,7 +83,7 @@ public class FastFall extends Module {
             return;
         }
 
-        if (Alien.PLAYER.isInWeb(mc.player)) return;
+        if (Supernova.PLAYER.isInWeb(mc.player)) return;
 
         if (mc.player.isOnGround()) {
 

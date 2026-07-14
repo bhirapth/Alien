@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.player;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.ClickBlockEvent;
 import dev.luminous.api.events.impl.PacketEvent;
@@ -179,7 +179,7 @@ public class AutoMine extends Module {
             InventoryUtil.switchToSlot(data.getSlot());
         }
         if (rotateConfig.getValue()) {
-            Alien.ROTATION.lookAt(data.getPos().toCenterPos());
+            Supernova.ROTATION.lookAt(data.getPos().toCenterPos());
         }
         sendSequencedPacket(id -> new PlayerActionC2SPacket(
                 PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, data.getPos(), data.getDirection(), id));
@@ -189,7 +189,7 @@ public class AutoMine extends Module {
             InventoryUtil.switchToSlot(slot);
         }
         if (rotateConfig.getValue() && AntiCheat.INSTANCE.snapBack.getValue()) {
-            Alien.ROTATION.snapBack();
+            Supernova.ROTATION.snapBack();
         }
         data.setStarted();
     }
@@ -215,7 +215,7 @@ public class AutoMine extends Module {
             InventoryUtil.switchToSlot(data.getSlot());
         }
         if (rotateConfig.getValue()) {
-            Alien.ROTATION.lookAt(data.getPos().toCenterPos());
+            Supernova.ROTATION.lookAt(data.getPos().toCenterPos());
         }
         sendSequencedPacket(id -> new PlayerActionC2SPacket(
                 PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, data.getPos(), data.getDirection(), id));
@@ -229,7 +229,7 @@ public class AutoMine extends Module {
             InventoryUtil.switchToSlot(slot);
         }
         if (rotateConfig.getValue() && AntiCheat.INSTANCE.snapBack.getValue()) {
-                Alien.ROTATION.snapBack();
+                Supernova.ROTATION.snapBack();
         }
     }
 

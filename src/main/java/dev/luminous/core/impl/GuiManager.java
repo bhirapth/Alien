@@ -1,7 +1,7 @@
 package dev.luminous.core.impl;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.utils.Wrapper;
 import dev.luminous.api.utils.math.FadeUtils;
 import dev.luminous.api.utils.render.Snow;
@@ -37,7 +37,7 @@ public class GuiManager implements Wrapper {
 		int xOffset = 30;
 		for (Module.Category category : Module.Category.values()) {
 			ClickGuiTab tab = new ClickGuiTab(category, xOffset, 50);
-			for (Module module : Alien.MODULE.modules) {
+			for (Module module : Supernova.MODULE.modules) {
 				if (module.getCategory() == category) {
 					ModuleComponent button = new ModuleComponent(tab, module);
 					tab.addChild(button);

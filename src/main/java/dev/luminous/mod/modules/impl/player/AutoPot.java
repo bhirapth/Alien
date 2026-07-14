@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.player;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.utils.entity.EntityUtil;
 import dev.luminous.api.utils.entity.InventoryUtil;
 import dev.luminous.api.utils.math.Timer;
@@ -80,22 +80,22 @@ public class AutoPot extends Module {
         int oldSlot = mc.player.getInventory().selectedSlot;
         int newSlot;
         if (inventory.getValue() && (newSlot = findPotionInventorySlot(targetEffect)) != -1) {
-            Alien.ROTATION.snapAt(Alien.ROTATION.rotationYaw, 90);
+            Supernova.ROTATION.snapAt(Supernova.ROTATION.rotationYaw, 90);
             InventoryUtil.inventorySwap(newSlot, mc.player.getInventory().selectedSlot);
             sendSequencedPacket(id -> new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, id));
             InventoryUtil.inventorySwap(newSlot, mc.player.getInventory().selectedSlot);
             EntityUtil.syncInventory();
             if (AntiCheat.INSTANCE.snapBack.getValue()) {
-                Alien.ROTATION.snapBack();
+                Supernova.ROTATION.snapBack();
             }
             delayTimer.reset();
         } else if ((newSlot = findPotion(targetEffect)) != -1) {
-            Alien.ROTATION.snapAt(Alien.ROTATION.rotationYaw, 90);
+            Supernova.ROTATION.snapAt(Supernova.ROTATION.rotationYaw, 90);
             InventoryUtil.switchToSlot(newSlot);
             sendSequencedPacket(id -> new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, id));
             InventoryUtil.switchToSlot(oldSlot);
             if (AntiCheat.INSTANCE.snapBack.getValue()) {
-                Alien.ROTATION.snapBack();
+                Supernova.ROTATION.snapBack();
             }
             delayTimer.reset();
         }

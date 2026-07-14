@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.render;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.utils.entity.EntityUtil;
 import dev.luminous.api.utils.render.Render2DUtil;
 import dev.luminous.api.utils.render.TextUtil;
@@ -94,8 +94,8 @@ public class NameTags extends Module {
                 if (distance.getValue()) {
                     final_string += " " + Formatting.RESET + String.format("%.1f", mc.player.distanceTo(ent)) + "m";
                 }
-                if (pops.getValue() && Alien.POP.getPop(ent.getName().getString()) != 0) {
-                    final_string += " §bPop" + " " + Formatting.LIGHT_PURPLE + Alien.POP.getPop(ent.getName().getString());
+                if (pops.getValue() && Supernova.POP.getPop(ent.getName().getString()) != 0) {
+                    final_string += " §bPop" + " " + Formatting.LIGHT_PURPLE + Supernova.POP.getPop(ent.getName().getString());
                 }
 
                 double posX = position.x;
@@ -241,11 +241,11 @@ public class NameTags extends Module {
                     Render2DUtil.drawRect(context.getMatrices(), tagX + textWidth + 2, (float) (posY - 14f), 1, 12, outline.getValue());
                 }
                 if (font.getValue() == Font.Fancy) {
-                    FontRenderers.ui.drawString(context.getMatrices(), final_string, tagX, (float) posY - 10, Alien.FRIEND.isFriend(ent) ? friendColor.getValue().getRGB() : this.color.getValue().getRGB());
+                    FontRenderers.ui.drawString(context.getMatrices(), final_string, tagX, (float) posY - 10, Supernova.FRIEND.isFriend(ent) ? friendColor.getValue().getRGB() : this.color.getValue().getRGB());
                 } else {
                     context.getMatrices().push();
                     context.getMatrices().translate(tagX, ((float) posY - 11), 0);
-                    context.drawText(mc.textRenderer, final_string, 0, 0, Alien.FRIEND.isFriend(ent) ? friendColor.getValue().getRGB() : this.color.getValue().getRGB(), true);
+                    context.drawText(mc.textRenderer, final_string, 0, 0, Supernova.FRIEND.isFriend(ent) ? friendColor.getValue().getRGB() : this.color.getValue().getRGB(), true);
                     context.getMatrices().pop();
                 }
                 context.getMatrices().pop();

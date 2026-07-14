@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.impl.UpdateVelocityEvent;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.movement.Velocity;
@@ -40,7 +40,7 @@ public abstract class MixinEntity {
 		if(Module.nullCheck()) return;
 		if ((Object) this == mc.player) {
 			UpdateVelocityEvent event = new UpdateVelocityEvent(movementInput, speed, mc.player.getYaw(), movementInputToVelocity(movementInput, speed, mc.player.getYaw()));
-			Alien.EVENT_BUS.post(event);
+			Supernova.EVENT_BUS.post(event);
 			if (event.isCancelled()) {
 				ci.cancel();
 				mc.player.setVelocity(mc.player.getVelocity().add(event.getVelocity()));

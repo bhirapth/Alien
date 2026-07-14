@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.render;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.Render3DEvent;
 import dev.luminous.api.utils.math.Animation;
@@ -19,7 +19,7 @@ public class Zoom extends Module {
         super("Zoom", Category.Render);
         setChinese("放大");
         INSTANCE = this;
-        Alien.EVENT_BUS.subscribe(new ZoomAnim());
+        Supernova.EVENT_BUS.subscribe(new ZoomAnim());
     }
 
     @Override

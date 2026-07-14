@@ -1,6 +1,6 @@
 package dev.luminous.core.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.Manager;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.render.XRay;
@@ -77,7 +77,7 @@ public class XrayManager extends Manager {
             }
             printwriter.close();
         } catch (Exception exception) {
-            System.out.println("[" + Alien.NAME + "] Failed to save xrays");
+            System.out.println("[" + Supernova.NAME + "] Failed to save xrays");
         }
     }
 }

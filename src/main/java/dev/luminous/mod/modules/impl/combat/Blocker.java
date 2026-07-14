@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.combat;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.utils.combat.CombatUtil;
 import dev.luminous.api.utils.entity.EntityUtil;
 import dev.luminous.api.utils.entity.InventoryUtil;
@@ -120,11 +120,11 @@ public class Blocker extends Module {
                 for (double z : offset) {
                     BlockPos surroundPos = new BlockPosX(mc.player.getX() + x, mc.player.getY(), mc.player.getZ() + z);
                     if (isBedrock(surroundPos)) continue;
-                    if (Alien.BREAK.isMining(surroundPos)) {
+                    if (Supernova.BREAK.isMining(surroundPos)) {
                         for (Direction direction : Direction.values()) {
                             if (direction == Direction.DOWN || direction == Direction.UP) continue;
                             BlockPos defensePos = surroundPos.offset(direction);
-                            if (detectMining.getValue() && Alien.BREAK.isMining(defensePos)) {
+                            if (detectMining.getValue() && Supernova.BREAK.isMining(defensePos)) {
                                 continue;
                             }
                             if (breakCrystal.getValue()) {
@@ -144,11 +144,11 @@ public class Blocker extends Module {
                     for (Direction i : Direction.values()) {
                         BlockPos surroundPos = new BlockPosX(mc.player.getX() + x, mc.player.getY() + 0.5, mc.player.getZ() + z).offset(i);
                         if (isBedrock(surroundPos)) continue;
-                        if (Alien.BREAK.isMining(surroundPos)) {
+                        if (Supernova.BREAK.isMining(surroundPos)) {
                             for (Direction direction : Direction.values()) {
                                 if (direction == Direction.DOWN || direction == Direction.UP) continue;
                                 BlockPos defensePos = surroundPos.offset(direction);
-                                if (detectMining.getValue() && Alien.BREAK.isMining(defensePos)) {
+                                if (detectMining.getValue() && Supernova.BREAK.isMining(defensePos)) {
                                     continue;
                                 }
                                 if (breakCrystal.getValue()) {
@@ -159,7 +159,7 @@ public class Blocker extends Module {
                                 }
                             }
                             BlockPos defensePos = surroundPos.up();
-                            if (detectMining.getValue() && Alien.BREAK.isMining(defensePos)) {
+                            if (detectMining.getValue() && Supernova.BREAK.isMining(defensePos)) {
                                 continue;
                             }
                             if (breakCrystal.getValue()) {
@@ -196,7 +196,7 @@ public class Blocker extends Module {
         if (list.contains(pos)) return;
         list.add(pos);
         if (!(placeProgress < blocksPer.getValue())) return;
-        if (detectMining.getValue() && Alien.BREAK.isMining(pos)) {
+        if (detectMining.getValue() && Supernova.BREAK.isMining(pos)) {
             return;
         }
         int oldSlot = mc.player.getInventory().selectedSlot;

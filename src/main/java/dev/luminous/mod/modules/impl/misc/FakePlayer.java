@@ -1,7 +1,7 @@
 package dev.luminous.mod.modules.impl.misc;
 
 import com.mojang.authlib.GameProfile;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.PacketEvent;
 import dev.luminous.api.utils.world.BlockPosX;
@@ -75,7 +75,7 @@ public class FakePlayer extends Module {
 		}
 		fakePlayer.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 9999, 2));
 		if (autoTotem.getValue() && fakePlayer.getOffHandStack().getItem() != Items.TOTEM_OF_UNDYING) {
-			Alien.POP.onTotemPop(fakePlayer);
+			Supernova.POP.onTotemPop(fakePlayer);
 			fakePlayer.setStackInHand(Hand.OFF_HAND, new ItemStack(Items.TOTEM_OF_UNDYING));
 		}
 		if (fakePlayer.isDead()) {

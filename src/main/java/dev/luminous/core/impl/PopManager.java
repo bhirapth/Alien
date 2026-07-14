@@ -1,6 +1,6 @@
 package dev.luminous.core.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.DeathEvent;
@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 public class PopManager implements Wrapper {
     public PopManager() {
-        Alien.EVENT_BUS.subscribe(this);
+        Supernova.EVENT_BUS.subscribe(this);
     }
 
     public final HashMap<String, Integer> popContainer = new HashMap<>();
@@ -36,7 +36,7 @@ public class PopManager implements Wrapper {
             if (deadPlayer.contains(player)) {
                 continue;
             }
-            Alien.EVENT_BUS.post(new DeathEvent(player));
+            Supernova.EVENT_BUS.post(new DeathEvent(player));
             onDeath(player);
             deadPlayer.add(player);
         }
@@ -67,6 +67,6 @@ public class PopManager implements Wrapper {
         } else {
             popContainer.put(player.getName().getString(), l_Count);
         }
-        Alien.EVENT_BUS.post(new TotemEvent(player));
+        Supernova.EVENT_BUS.post(new TotemEvent(player));
     }
 }

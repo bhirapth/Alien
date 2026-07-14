@@ -1,6 +1,6 @@
 package dev.luminous.api.utils.math;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.utils.Wrapper;
 
 public class AnimateUtil implements Wrapper {
@@ -41,7 +41,7 @@ public class AnimateUtil implements Wrapper {
         }
 
         double diff = (endPoint - current);
-        double factor = diff * mc.getTickDelta() / (1 / speed * (Math.min(240D, Alien.FPS.getFps()) / 240D));
+        double factor = diff * mc.getTickDelta() / (1 / speed * (Math.min(240D, Supernova.FPS.getFps()) / 240D));
         if (diff < 0 && factor < diff) {
             factor = diff;
         } else if (diff > 0 && factor >= diff) {

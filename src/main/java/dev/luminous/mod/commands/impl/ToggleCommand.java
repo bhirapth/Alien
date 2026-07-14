@@ -1,6 +1,6 @@
 package dev.luminous.mod.commands.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.CommandManager;
 import dev.luminous.mod.commands.Command;
 import dev.luminous.mod.modules.Module;
@@ -21,7 +21,7 @@ public class ToggleCommand extends Command {
 			return;
 		}
 		String moduleName = parameters[0];
-		Module module = Alien.MODULE.getModuleByName(moduleName);
+		Module module = Supernova.MODULE.getModuleByName(moduleName);
 		if (module == null) {
 			CommandManager.sendChatMessage("§cUnknown module");
 			return;
@@ -34,8 +34,8 @@ public class ToggleCommand extends Command {
 		if (count == 1) {
 			String input = seperated.get(seperated.size() - 1).toLowerCase();
 			List<String> correct = new ArrayList<>();
-			for (Module x : Alien.MODULE.modules) {
-				if (input.equalsIgnoreCase(Alien.PREFIX + "toggle") || x.getName().toLowerCase().startsWith(input)) {
+			for (Module x : Supernova.MODULE.modules) {
+				if (input.equalsIgnoreCase(Supernova.PREFIX + "toggle") || x.getName().toLowerCase().startsWith(input)) {
 					correct.add(x.getName());
 				}
 			}

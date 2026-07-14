@@ -2,7 +2,7 @@ package dev.luminous.mod.modules.impl.combat;
 
 import dev.luminous.api.utils.world.BlockPosX;
 import dev.luminous.api.utils.world.BlockUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.player.PacketMine;
 import dev.luminous.mod.modules.settings.impl.BooleanSetting;
@@ -23,7 +23,7 @@ public class AntiCrawl extends Module {
 	@Override
 	public void onUpdate() {
 		work = false;
-		if (mc.player.isCrawling() || pre.getValue() && Alien.BREAK.isMining(mc.player.getBlockPos())) {
+		if (mc.player.isCrawling() || pre.getValue() && Supernova.BREAK.isMining(mc.player.getBlockPos())) {
 			for (double offset : xzOffset) {
 				for (double offset2 : xzOffset) {
 					BlockPos pos = new BlockPosX(mc.player.getX() + offset, mc.player.getY() + 1.2, mc.player.getZ() + offset2);

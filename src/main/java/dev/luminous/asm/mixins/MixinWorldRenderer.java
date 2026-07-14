@@ -1,6 +1,6 @@
 package dev.luminous.asm.mixins;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.ShaderManager;
 import dev.luminous.mod.modules.impl.player.Freecam;
 import dev.luminous.mod.modules.impl.render.Shader;
@@ -18,7 +18,7 @@ public abstract class MixinWorldRenderer {
 	void replaceShaderHook(PostEffectProcessor instance, float tickDelta) {
 		ShaderManager.Shader shaders = Shader.INSTANCE.mode.getValue();
 		if (Shader.INSTANCE.isOn() && mc.world != null) {
-			Alien.SHADER.setupShader(shaders, Alien.SHADER.getShaderOutline(shaders));
+			Supernova.SHADER.setupShader(shaders, Supernova.SHADER.getShaderOutline(shaders));
 		} else {
 			instance.render(tickDelta);
 		}

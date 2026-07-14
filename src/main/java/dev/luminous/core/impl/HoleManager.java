@@ -2,7 +2,7 @@ package dev.luminous.core.impl;
 
 import dev.luminous.api.utils.Wrapper;
 import dev.luminous.api.utils.world.BlockUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -18,7 +18,7 @@ public class HoleManager implements Wrapper {
         int blockProgress = 0;
         for (Direction i : Direction.values()) {
             if (i == Direction.UP || i == Direction.DOWN) continue;
-            if (anyBlock && !mc.world.isAir(pos.offset(i)) || Alien.HOLE.isHard(pos.offset(i)))
+            if (anyBlock && !mc.world.isAir(pos.offset(i)) || Supernova.HOLE.isHard(pos.offset(i)))
                 blockProgress++;
         }
         return (!checkTrap || (mc.world.isAir(pos)
@@ -38,7 +38,7 @@ public class HoleManager implements Wrapper {
             if (pos.getX() != mc.player.getBlockX() || pos.getZ() != mc.player.getBlockZ()) {
                 if (!up && pos.getY() + 1 > mc.player.getY()) continue;
             }
-            if (Alien.HOLE.isHole(pos, true, true, any) || doubleHole && isDoubleHole(pos)) {
+            if (Supernova.HOLE.isHole(pos, true, true, any) || doubleHole && isDoubleHole(pos)) {
                 if (pos.getY() - mc.player.getBlockY() > 1) continue;
                 double distance = MathHelper.sqrt((float) mc.player.squaredDistanceTo(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5));
                 if (bestPos == null || distance < bestDistance) {

@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.combat;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.CommandManager;
 import dev.luminous.api.utils.combat.CombatUtil;
 import dev.luminous.api.utils.entity.EntityUtil;
@@ -78,7 +78,7 @@ public class Burrow extends Module {
 
     @Override
     public void onUpdate() {
-        if (Alien.PLAYER.isInWeb(mc.player)) {
+        if (Supernova.PLAYER.isInWeb(mc.player)) {
             webTimer.reset();
             return;
         }
@@ -202,7 +202,7 @@ public class Burrow extends Module {
         timer.reset();
         doSwap(block);
         if (this.rotate.getValue() == RotateMode.Bypass) {
-            Alien.ROTATION.snapAt(Alien.ROTATION.rotationYaw, 90);
+            Supernova.ROTATION.snapAt(Supernova.ROTATION.rotationYaw, 90);
         }
         placeBlock(playerPos, rotate);
         placeBlock(pos1, rotate);
@@ -313,7 +313,7 @@ public class Burrow extends Module {
         if (rotate.getValue() == RotateMode.None) {
             mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(offPos.getX() + 0.5, mc.player.getY() + 0.1, offPos.getZ() + 0.5, false));
         } else {
-            mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.Full(offPos.getX() + 0.5, mc.player.getY() + 0.1, offPos.getZ() + 0.5, Alien.ROTATION.rotationYaw, 90, false));
+            mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.Full(offPos.getX() + 0.5, mc.player.getY() + 0.1, offPos.getZ() + 0.5, Supernova.ROTATION.rotationYaw, 90, false));
         }
     }
 
@@ -331,7 +331,7 @@ public class Burrow extends Module {
         if (!BlockUtil.canReplace(pos)) {
             return false;
         }
-        if (detectMine.getValue() && Alien.BREAK.isMining(pos)) {
+        if (detectMine.getValue() && Supernova.BREAK.isMining(pos)) {
             return false;
         }
         return !hasEntity(pos);

@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.movement;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.EntityVelocityUpdateEvent;
 import dev.luminous.api.events.impl.PacketEvent;
@@ -63,7 +63,7 @@ public class Velocity extends Module {
 			if (!lagBackTimer.passed(100)) {
 				return;
 			}
-			boolean insideBlock = Alien.PLAYER.insideBlock;
+			boolean insideBlock = Supernova.PLAYER.insideBlock;
 			if (mode.is(Mode.Wall) && !insideBlock) return;
 			event.cancel();
 			flag = true;
@@ -87,7 +87,7 @@ public class Velocity extends Module {
 			if (!lagBackTimer.passed(100)) {
 				return;
 			}
-			boolean insideBlock = Alien.PLAYER.insideBlock;
+			boolean insideBlock = Supernova.PLAYER.insideBlock;
 			if (mode.is(Mode.Wall) && !insideBlock) return;
 
             if (event.getPacket() instanceof ExplosionS2CPacket explosion) {
@@ -130,8 +130,8 @@ public class Velocity extends Module {
 			return;
 
 		if (flag) {
-			if (lagBackTimer.passed(100) && (flagInWall.getValue() || !Alien.PLAYER.insideBlock)) {
-				Alien.ROTATION.snapBack();
+			if (lagBackTimer.passed(100) && (flagInWall.getValue() || !Supernova.PLAYER.insideBlock)) {
+				Supernova.ROTATION.snapBack();
 				mc.getNetworkHandler().sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK,
 						mc.player.isCrawling() ? mc.player.getBlockPos() : mc.player.getBlockPos().up(), Direction.DOWN));
 				//mc.getNetworkHandler().sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, BlockPos.ofFloored(mc.player.getPos()), mc.player.getHorizontalFacing().getOpposite()));

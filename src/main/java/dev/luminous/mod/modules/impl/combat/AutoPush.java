@@ -7,7 +7,7 @@ import dev.luminous.api.utils.math.MathUtil;
 import dev.luminous.api.utils.math.Timer;
 import dev.luminous.api.utils.world.BlockPosX;
 import dev.luminous.api.utils.world.BlockUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.client.AntiCheat;
 import dev.luminous.mod.modules.impl.client.ClientSetting;
@@ -58,13 +58,13 @@ public class AutoPush extends Module {
 
     public static void pistonFacing(Direction i) {
         if (i == Direction.EAST) {
-            Alien.ROTATION.snapAt(-90.0f, 5.0f);
+            Supernova.ROTATION.snapAt(-90.0f, 5.0f);
         } else if (i == Direction.WEST) {
-            Alien.ROTATION.snapAt(90.0f, 5.0f);
+            Supernova.ROTATION.snapAt(90.0f, 5.0f);
         } else if (i == Direction.NORTH) {
-            Alien.ROTATION.snapAt(180.0f, 5.0f);
+            Supernova.ROTATION.snapAt(180.0f, 5.0f);
         } else if (i == Direction.SOUTH) {
-            Alien.ROTATION.snapAt(0.0f, 5.0f);
+            Supernova.ROTATION.snapAt(0.0f, 5.0f);
         }
     }
 
@@ -194,7 +194,7 @@ public class AutoPush extends Module {
                         int pistonSlot = findClass(PistonBlock.class);
                         Direction side = BlockUtil.getPlaceSide(piston);
                         if (side != null) {
-                            if (rotate.getValue()) Alien.ROTATION.lookAt(piston.offset(side), side.getOpposite());
+                            if (rotate.getValue()) Supernova.ROTATION.lookAt(piston.offset(side), side.getOpposite());
                             if (yawDeceive.getValue()) pistonFacing(direction.getOpposite());
                             int old = mc.player.getInventory().selectedSlot;
                             doSwap(pistonSlot);
@@ -205,9 +205,9 @@ public class AutoPush extends Module {
                             } else {
                                 doSwap(old);
                             }
-                            if (rotate.getValue() && yawDeceive.getValue()) Alien.ROTATION.lookAt(piston.offset(side), side.getOpposite());
+                            if (rotate.getValue() && yawDeceive.getValue()) Supernova.ROTATION.lookAt(piston.offset(side), side.getOpposite());
                             if (rotate.getValue() && AntiCheat.INSTANCE.snapBack.getValue()) {
-                                Alien.ROTATION.snapBack();
+                                Supernova.ROTATION.snapBack();
                             }
                             for (Direction i : Direction.values()) {
                                 if (getBlock(piston.offset(i)) == getBlockType()) {
@@ -278,7 +278,7 @@ public class AutoPush extends Module {
                         int pistonSlot = findClass(PistonBlock.class);
                         Direction side = BlockUtil.getPlaceSide(piston);
                         if (side != null) {
-                            if (rotate.getValue()) Alien.ROTATION.lookAt(piston.offset(side), side.getOpposite());
+                            if (rotate.getValue()) Supernova.ROTATION.lookAt(piston.offset(side), side.getOpposite());
                             if (yawDeceive.getValue()) pistonFacing(direction.getOpposite());
                             int old = mc.player.getInventory().selectedSlot;
                             doSwap(pistonSlot);
@@ -289,9 +289,9 @@ public class AutoPush extends Module {
                             } else {
                                 doSwap(old);
                             }
-                            if (rotate.getValue() && yawDeceive.getValue()) Alien.ROTATION.lookAt(piston.offset(side), side.getOpposite());
+                            if (rotate.getValue() && yawDeceive.getValue()) Supernova.ROTATION.lookAt(piston.offset(side), side.getOpposite());
                             if (rotate.getValue() && AntiCheat.INSTANCE.snapBack.getValue()) {
-                                Alien.ROTATION.snapBack();
+                                Supernova.ROTATION.snapBack();
                             }
                         }
                         CombatUtil.modifyPos = null;
@@ -342,7 +342,7 @@ public class AutoPush extends Module {
         Direction side = BlockUtil.getPlaceSide(pos);
         if (side == null) return false;
         Vec3d directionVec = new Vec3d(pos.getX() + 0.5 + side.getVector().getX() * 0.5, pos.getY() + 0.5 + side.getVector().getY() * 0.5, pos.getZ() + 0.5 + side.getVector().getZ() * 0.5);
-        float[] rotation = Alien.ROTATION.getRotation(directionVec);
+        float[] rotation = Supernova.ROTATION.getRotation(directionVec);
         return MathUtil.getFacingOrder(rotation[0], rotation[1]).getOpposite() == facing;
     }
 
@@ -369,7 +369,7 @@ public class AutoPush extends Module {
     }
     private Boolean canPush(PlayerEntity player) {
         if (onlyGround.getValue() && !player.isOnGround()) return false;
-        if (!allowWeb.getValue() && Alien.PLAYER.isInWeb(player)) return false;
+        if (!allowWeb.getValue() && Supernova.PLAYER.isInWeb(player)) return false;
         float[] offset = new float[]{-0.25f, 0f, 0.25f};
 
         int progress = 0;
@@ -410,7 +410,7 @@ public class AutoPush extends Module {
             }
         }
 
-        return progress > surroundCheck.getValue() - 1 || Alien.HOLE.isHard(new BlockPosX(player.getX(), player.getY() + 0.5, player.getZ()));
+        return progress > surroundCheck.getValue() - 1 || Supernova.HOLE.isHard(new BlockPosX(player.getX(), player.getY() + 0.5, player.getZ()));
     }
     private Block getBlock(BlockPos pos) {
         return mc.world.getBlockState(pos).getBlock();

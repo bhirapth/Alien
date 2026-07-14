@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.impl.player.freelook;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.Render3DEvent;
 import dev.luminous.mod.modules.Module;
@@ -12,7 +12,7 @@ public class FreeLook extends Module {
         setChinese("自由视角");
         camera = new CameraState();
         INSTANCE = this;
-        Alien.EVENT_BUS.subscribe(new FreeLookUpdate());
+        Supernova.EVENT_BUS.subscribe(new FreeLookUpdate());
     }
 
     private final CameraState camera;

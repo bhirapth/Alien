@@ -1,6 +1,6 @@
 package dev.luminous.mod.modules.settings.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.core.impl.ModuleManager;
 import dev.luminous.mod.modules.settings.Setting;
 import net.minecraft.client.util.InputUtil;
@@ -27,7 +27,7 @@ public class StringSetting extends Setting {
     }
     @Override
     public void loadSetting() {
-        setValue(Alien.CONFIG.getString(getLine(), defaultValue));
+        setValue(Supernova.CONFIG.getString(getLine(), defaultValue));
     }
     
     public String getValue() {

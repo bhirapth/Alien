@@ -1,6 +1,6 @@
 package dev.luminous.mod.commands.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.commands.Command;
 import dev.luminous.core.impl.CommandManager;
 
@@ -21,12 +21,12 @@ public class FriendCommand extends Command {
 		}
         switch (parameters[0]) {
             case "reset" -> {
-                Alien.FRIEND.friendList.clear();
+                Supernova.FRIEND.friendList.clear();
                 CommandManager.sendChatMessage("§fFriends list got reset");
                 return;
             }
             case "list" -> {
-                if (Alien.FRIEND.friendList.isEmpty()) {
+                if (Supernova.FRIEND.friendList.isEmpty()) {
                     CommandManager.sendChatMessage("§fFriends list is empty");
                     return;
                 }
@@ -34,7 +34,7 @@ public class FriendCommand extends Command {
                 int time = 0;
                 boolean first = true;
                 boolean start = true;
-                for (String name : Alien.FRIEND.friendList) {
+                for (String name : Supernova.FRIEND.friendList) {
                     if (!first) {
                         friends.append(", ");
                     }
@@ -56,8 +56,8 @@ public class FriendCommand extends Command {
             }
             case "add" -> {
                 if (parameters.length == 2) {
-                    Alien.FRIEND.addFriend(parameters[1]);
-                    CommandManager.sendChatMessage("§f" + parameters[1] + (Alien.FRIEND.isFriend(parameters[1]) ? " §ahas been friended" : " §chas been unfriended"));
+                    Supernova.FRIEND.addFriend(parameters[1]);
+                    CommandManager.sendChatMessage("§f" + parameters[1] + (Supernova.FRIEND.isFriend(parameters[1]) ? " §ahas been friended" : " §chas been unfriended"));
                     return;
                 }
                 sendUsage();
@@ -65,8 +65,8 @@ public class FriendCommand extends Command {
             }
             case "remove" -> {
                 if (parameters.length == 2) {
-                    Alien.FRIEND.removeFriend(parameters[1]);
-                    CommandManager.sendChatMessage("§f" + parameters[1] + (Alien.FRIEND.isFriend(parameters[1]) ? " §ahas been friended" : " §chas been unfriended"));
+                    Supernova.FRIEND.removeFriend(parameters[1]);
+                    CommandManager.sendChatMessage("§f" + parameters[1] + (Supernova.FRIEND.isFriend(parameters[1]) ? " §ahas been friended" : " §chas been unfriended"));
                     return;
                 }
                 sendUsage();
@@ -75,7 +75,7 @@ public class FriendCommand extends Command {
         }
 
         if (parameters.length == 1) {
-			CommandManager.sendChatMessage("§f" + parameters[0] + (Alien.FRIEND.isFriend(parameters[0]) ? " §ais friended" : " §cisn't friended"));
+			CommandManager.sendChatMessage("§f" + parameters[0] + (Supernova.FRIEND.isFriend(parameters[0]) ? " §ais friended" : " §cisn't friended"));
 			return;
 		}
 
@@ -89,7 +89,7 @@ public class FriendCommand extends Command {
 			List<String> correct = new ArrayList<>();
 			List<String> list = List.of("add", "remove", "list", "reset");
 			for (String x : list) {
-				if (input.equalsIgnoreCase(Alien.PREFIX + "friend") || x.toLowerCase().startsWith(input)) {
+				if (input.equalsIgnoreCase(Supernova.PREFIX + "friend") || x.toLowerCase().startsWith(input)) {
 					correct.add(x);
 				}
 			}

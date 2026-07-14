@@ -3,12 +3,12 @@ plugins {
     id 'maven-publish'
 }
 
-archivesBaseName = project.archives_base_name
+archivesBaseName = 'supernova'
 version = project.mod_version
 group = project.maven_group
 
 loom {
-    accessWidenerPath = file("src/main/resources/alien.accesswidener")
+    accessWidenerPath = file("src/main/resources/supernova.accesswidener")
 }
 
 repositories {

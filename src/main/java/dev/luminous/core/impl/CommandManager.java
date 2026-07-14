@@ -1,6 +1,6 @@
 package dev.luminous.core.impl;
 
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.api.interfaces.IChatHudHook;
 import dev.luminous.api.utils.Wrapper;
 import dev.luminous.mod.commands.Command;
@@ -52,7 +52,7 @@ public class CommandManager implements Wrapper {
     public void command(String[] commandIn) {
 
         // Get the command from the user's message. (Index 0 is Username)
-        Command command = commands.get(commandIn[0].substring(Alien.PREFIX.length()).toLowerCase());
+        Command command = commands.get(commandIn[0].substring(Supernova.PREFIX.length()).toLowerCase());
 
         // If the command does not exist, throw an error.
         if (command == null)

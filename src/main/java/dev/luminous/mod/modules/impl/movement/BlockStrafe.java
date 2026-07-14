@@ -2,7 +2,7 @@ package dev.luminous.mod.modules.impl.movement;
 
 import dev.luminous.api.events.eventbus.EventHandler;
 import dev.luminous.api.events.impl.MoveEvent;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.impl.combat.AutoAnchor;
 import dev.luminous.mod.modules.settings.impl.SliderSetting;
@@ -22,8 +22,8 @@ public class BlockStrafe extends Module {
 
     @EventHandler
     public void onMove(MoveEvent event) {
-        if (!Alien.PLAYER.insideBlock) return;
-        if (Alien.PLAYER.isInWeb(mc.player)) return;
+        if (!Supernova.PLAYER.insideBlock) return;
+        if (Supernova.PLAYER.isInWeb(mc.player)) return;
         double speed = AutoAnchor.INSTANCE.currentPos == null ? this.speed.getValue() : aSpeed.getValue();
         double moveSpeed = 0.2873 / 100 * speed;
         double n = mc.player.input.movementForward;

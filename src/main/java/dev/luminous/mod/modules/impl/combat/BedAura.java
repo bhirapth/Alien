@@ -13,7 +13,7 @@ import dev.luminous.api.utils.math.Timer;
 import dev.luminous.api.utils.render.ColorUtil;
 import dev.luminous.api.utils.render.Render3DUtil;
 import dev.luminous.api.utils.world.BlockUtil;
-import dev.luminous.Alien;
+import dev.luminous.Supernova;
 import dev.luminous.mod.modules.Module;
 import dev.luminous.mod.modules.settings.SwingSide;
 import dev.luminous.mod.modules.settings.impl.BooleanSetting;
@@ -151,8 +151,8 @@ public class BedAura extends Module {
 
 	@Override
 	public void onEnable() {
-		lastYaw = Alien.ROTATION.lastYaw;
-		lastPitch = Alien.ROTATION.lastPitch;
+		lastYaw = Supernova.ROTATION.lastYaw;
+		lastPitch = Supernova.ROTATION.lastPitch;
 	}
 
 	@EventHandler()
@@ -160,14 +160,14 @@ public class BedAura extends Module {
 		if (!rotate.getValue() && yawDeceive.getValue()) {
 			event.setYaw(yaw);
 		} else if (placePos != null && yawStep.getValue() && directionVec != null) {
-			float[] newAngle = injectStep(Alien.ROTATION.getRotation(directionVec), steps.getValueFloat());
+			float[] newAngle = injectStep(Supernova.ROTATION.getRotation(directionVec), steps.getValueFloat());
 			lastYaw = newAngle[0];
 			lastPitch = newAngle[1];
 			event.setYaw(lastYaw);
 			event.setPitch(lastPitch);
 		} else {
-			lastYaw = Alien.ROTATION.lastYaw;
-			lastPitch = Alien.ROTATION.lastPitch;
+			lastYaw = Supernova.ROTATION.lastYaw;
+			lastPitch = Supernova.ROTATION.lastPitch;
 		}
 	}
 
@@ -296,7 +296,7 @@ public class BedAura extends Module {
 		Direction facing = null;
 		for (Direction i : Direction.values()) {
 			if (i == Direction.UP || i == Direction.DOWN) continue;
-			if ((legacy.getValue() && BlockUtil.canReplace(pos.offset(i)) || BlockUtil.clientCanPlace(pos.offset(i), false)) && BlockUtil.canClick(pos.offset(i).down()) && (!checkMine.getValue() || !Alien.BREAK.isMining(pos.offset(i)))) {
+			if ((legacy.getValue() && BlockUtil.canReplace(pos.offset(i)) || BlockUtil.clientCanPlace(pos.offset(i), false)) && BlockUtil.canClick(pos.offset(i).down()) && (!checkMine.getValue() || !Supernova.BREAK.isMining(pos.offset(i)))) {
 				facing = i;
 				break;
 			}
@@ -421,12 +421,12 @@ public class BedAura extends Module {
 	}
 	
 	private boolean canPlaceBed(BlockPos pos) {
-		if (BlockUtil.canReplace(pos) && (!checkMine.getValue() || !Alien.BREAK.isMining(pos)) && (!legacy.getValue() || BlockUtil.canClick(pos.down()))) {
+		if (BlockUtil.canReplace(pos) && (!checkMine.getValue() || !Supernova.BREAK.isMining(pos)) && (!legacy.getValue() || BlockUtil.canClick(pos.down()))) {
 			for (Direction i : Direction.values()) {
 				if (i == Direction.UP || i == Direction.DOWN) continue;
 				if (!BlockUtil.isStrictDirection(pos.offset(i).down(), Direction.UP)) continue;
 				if (!isTrueFacing(pos.offset(i), i.getOpposite())) continue;
-				if ((legacy.getValue() && BlockUtil.canReplace(pos.offset(i)) || BlockUtil.clientCanPlace(pos.offset(i), false)) && BlockUtil.canClick(pos.offset(i).down()) && (!checkMine.getValue() || !Alien.BREAK.isMining(pos.offset(i)))) {
+				if ((legacy.getValue() && BlockUtil.canReplace(pos.offset(i)) || BlockUtil.clientCanPlace(pos.offset(i), false)) && BlockUtil.canClick(pos.offset(i).down()) && (!checkMine.getValue() || !Supernova.BREAK.isMining(pos.offset(i)))) {
 					return true;
 				}
 			}
@@ -437,11 +437,11 @@ public class BedAura extends Module {
 	private boolean isTrueFacing(BlockPos pos, Direction facing) {
 		if (yawDeceive.getValue()) return true;
 		Vec3d hitVec = pos.toCenterPos().add(new Vec3d(0, -0.5, 0));
-		return Direction.fromRotation(Alien.ROTATION.getRotation(hitVec)[0]) == facing;
+		return Direction.fromRotation(Supernova.ROTATION.getRotation(hitVec)[0]) == facing;
 	}
 
 	private boolean isTrueFacingNow(Direction facing) {
-		return Direction.fromRotation(Alien.ROTATION.lastYaw) == facing;
+		return Direction.fromRotation(Supernova.ROTATION.lastYaw) == facing;
 	}
 	public enum Page {
 		General,
@@ -453,11 +453,11 @@ public class BedAura extends Module {
 
 	public boolean faceVector(Vec3d directionVec) {
 		if (!yawStep.getValue()) {
-			Alien.ROTATION.lookAt(directionVec);
+			Supernova.ROTATION.lookAt(directionVec);
 			return true;
 		} else {
 			this.directionVec = directionVec;
-			if (Alien.ROTATION.inFov(directionVec, fov.getValueFloat())) return true;
+			if (Supernova.ROTATION.inFov(directionVec, fov.getValueFloat())) return true;
 		}
 		return !checkFov.getValue();
 	}
