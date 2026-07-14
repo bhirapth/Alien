@@ -19,56 +19,38 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get last version tag
-        id: last_version
+      - name: Get latest release version
+        id: latest_version
         run: |
-          LAST_TAG=$(git tag -l "v*" --sort=-v:refname | head -1)
-          if [ -z "$LAST_TAG" ]; then
-            LAST_TAG="v0.0.0"
+          VERSION=$(gh release list --repo ${{ github.repository }} --limit 1 --json tagName -q '.[0].tagName' 2>/dev/null | sed 's/^v//')
+          if [ -z "$VERSION" ]; then
+            VERSION="1.0.0"
           fi
-          echo "tag=$LAST_TAG" >> $GITHUB_OUTPUT
-          echo "Last version: $LAST_TAG"
-
-      - name: Get version from gradle.properties
-        id: gradle_version
-        run: |
-          GRADLE_VERSION=$(grep "^mod_version" gradle.properties | cut -d'=' -f2 | tr -d ' ')
-          echo "version=$GRADLE_VERSION" >> $GITHUB_OUTPUT
-          echo "Gradle version: $GRADLE_VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Latest version: $VERSION"
 
       - name: Calculate next version
         id: next_version
         run: |
-          LAST_TAG="${{ steps.last_version.outputs.tag }}"
-          LAST_VERSION=${LAST_TAG#v}
-          GRADLE_VERSION="${{ steps.gradle_version.outputs.version }}"
-
-          IFS='.' read -r G_MAJOR G_MINOR G_PATCH <<< "$GRADLE_VERSION"
-          IFS='.' read -r L_MAJOR L_MINOR L_PATCH <<< "$LAST_VERSION"
-
-          # If gradle version is higher than last tag, use gradle version (manual bump)
-          # Otherwise auto-increment patch
-          if [ "$G_MAJOR" -gt "$L_MAJOR" ] || \
-             ([ "$G_MAJOR" -eq "$L_MAJOR" ] && [ "$G_MINOR" -gt "$L_MINOR" ]) || \
-             ([ "$G_MAJOR" -eq "$L_MAJOR" ] && [ "$G_MINOR" -eq "$L_MINOR" ] && [ "$G_PATCH" -gt "$L_PATCH" ]); then
-            NEW_VERSION="$GRADLE_VERSION"
-            echo "Using gradle version (manual bump detected)"
-          else
-            NEW_VERSION="$G_MAJOR.$G_MINOR.$((L_PATCH + 1))"
-            echo "Auto-incrementing patch"
+          VERSION="${{ steps.latest_version.outputs.version }}"
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+          PATCH=$((PATCH + 1))
+          if [ "$PATCH" -ge 10 ]; then
+            PATCH=0
+            MINOR=$((MINOR + 1))
           fi
-
+          if [ "$MINOR" -ge 10 ]; then
+            MINOR=0
+            MAJOR=$((MAJOR + 1))
+          fi
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
-          echo "New version: v$NEW_VERSION"
+          echo "Next version: v$NEW_VERSION"
 
-      - name: Update version in gradle.properties
+      - name: Update gradle.properties
         run: |
-          NEW_VERSION="${{ steps.next_version.outputs.version }}"
-          sed -i "s/^mod_version = .*/mod_version = $NEW_VERSION/" gradle.properties
+          sed -i "s/^mod_version = .*/mod_version = ${{ steps.next_version.outputs.version }}/" gradle.properties
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -87,7 +69,6 @@ jobs:
         run: |
           ARTIFACT=$(find build/libs -name "*.jar" -not -name "*sources*" | head -1)
           echo "artifact=$ARTIFACT" >> $GITHUB_OUTPUT
-          echo "Found artifact: $ARTIFACT"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -95,17 +76,14 @@ jobs:
           name: supernova-${{ steps.next_version.outputs.version }}
           path: ${{ steps.find-artifact.outputs.artifact }}
 
-      - name: Commit version bump
+      - name: Commit and tag
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add gradle.properties
-          git commit -m "chore: bump version to ${{ steps.next_version.outputs.version }}" || echo "No changes to commit"
-
-      - name: Create and push tag
-        run: |
-          git tag -a "v${{ steps.next_version.outputs.version }}" -m "Release v${{ steps.next_version.outputs.version }}"
-          git push origin "v${{ steps.next_version.outputs.version }}"
+          git commit -m "chore: release v${{ steps.next_version.outputs.version }}" || true
+          git tag -a "v${{ steps.next_version.outputs.version }}" -m "v${{ steps.next_version.outputs.version }}"
+          git push origin HEAD --tags
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
@@ -114,5 +92,3 @@ jobs:
           name: "v${{ steps.next_version.outputs.version }}"
           files: ${{ steps.find-artifact.outputs.artifact }}
           generate_release_notes: true
-          draft: false
-          prerelease: false
