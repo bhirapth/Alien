@@ -12,7 +12,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "dev.luminous.Supernova"
+      "cc.supernova.Supernova"
     ]
   },
   "mixins": [
