@@ -67,8 +67,8 @@ public class SelfFill extends Module {
         BlockPos pos = mc.player.getBlockPos();
         int solid = 0;
         for (Direction dir : Direction.HORIZONTAL) {
-            if (BlockUtil.isSolid(pos.offset(dir))) solid++;
+            if (mc.world.getBlockState(pos.offset(dir)).isSolid()) solid++;
         }
-        return solid >= 4 && BlockUtil.isSolid(pos.down());
+        return solid >= 4 && mc.world.getBlockState(pos.down()).isSolid();
     }
 }

@@ -41,11 +41,11 @@ public class HoleKick extends Module {
         BlockPos pos = player.getBlockPos();
         int surrounding = 0;
         for (Direction dir : Direction.HORIZONTAL) {
-            if (BlockUtil.isSolid(pos.offset(dir))) {
+            if (mc.world.getBlockState(pos.offset(dir)).isSolid()) {
                 surrounding++;
             }
         }
-        return surrounding >= 4 && BlockUtil.isSolid(pos.down());
+        return surrounding >= 4 && mc.world.getBlockState(pos.down()).isSolid();
     }
 
     private void kickFromHole(PlayerEntity target) {
