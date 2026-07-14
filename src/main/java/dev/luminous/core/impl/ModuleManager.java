@@ -58,6 +58,7 @@ public class ModuleManager implements Wrapper {
         addModule(new OffFirework());
         addModule(new AutoEXP());
         addModule(new AutoHeal());
+        addModule(new AutoGapple());
         addModule(new AutoPot());
         addModule(new AutoPush());
         addModule(new AutoTotem());
