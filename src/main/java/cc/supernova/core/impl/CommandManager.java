@@ -35,6 +35,7 @@ public class CommandManager implements Wrapper {
         registerCommand(new ToggleCommand());
         registerCommand(new TradeCommand());
         registerCommand(new WatermarkCommand());
+        registerCommand(new ConfigCommand());
     }
 
     private void registerCommand(Command command) {
