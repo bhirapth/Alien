@@ -33,14 +33,35 @@ jobs:
           echo "tag=$LAST_TAG" >> $GITHUB_OUTPUT
           echo "Last version: $LAST_TAG"
 
+      - name: Get version from gradle.properties
+        id: gradle_version
+        run: |
+          GRADLE_VERSION=$(grep "^mod_version" gradle.properties | cut -d'=' -f2 | tr -d ' ')
+          echo "version=$GRADLE_VERSION" >> $GITHUB_OUTPUT
+          echo "Gradle version: $GRADLE_VERSION"
+
       - name: Calculate next version
         id: next_version
         run: |
           LAST_TAG="${{ steps.last_version.outputs.tag }}"
-          VERSION=${LAST_TAG#v}
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
-          PATCH=$((PATCH + 1))
-          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          LAST_VERSION=${LAST_TAG#v}
+          GRADLE_VERSION="${{ steps.gradle_version.outputs.version }}"
+
+          IFS='.' read -r G_MAJOR G_MINOR G_PATCH <<< "$GRADLE_VERSION"
+          IFS='.' read -r L_MAJOR L_MINOR L_PATCH <<< "$LAST_VERSION"
+
+          # If gradle version is higher than last tag, use gradle version (manual bump)
+          # Otherwise auto-increment patch
+          if [ "$G_MAJOR" -gt "$L_MAJOR" ] || \
+             ([ "$G_MAJOR" -eq "$L_MAJOR" ] && [ "$G_MINOR" -gt "$L_MINOR" ]) || \
+             ([ "$G_MAJOR" -eq "$L_MAJOR" ] && [ "$G_MINOR" -eq "$L_MINOR" ] && [ "$G_PATCH" -gt "$L_PATCH" ]); then
+            NEW_VERSION="$GRADLE_VERSION"
+            echo "Using gradle version (manual bump detected)"
+          else
+            NEW_VERSION="$G_MAJOR.$G_MINOR.$((L_PATCH + 1))"
+            echo "Auto-incrementing patch"
+          fi
+
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
           echo "New version: v$NEW_VERSION"
 
